@@ -1,6 +1,7 @@
 import random
 import numpy as np
 
+# Liyong Wang want to join in this project (6/24/2024)
 # blocks: ◈ is stone
 Time_Spent = 0
 game_size = 21
