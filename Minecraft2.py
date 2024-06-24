@@ -254,9 +254,9 @@ Lotteries = 1
 Saplings = 0
 y_terrain = 10
 Server_Views = 0
-block_types = ['▪', '|', '0', '◈', '∥']
-block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS']
-block_count = [0, 0, 0, 0, 0]
+block_types = ['▪', '|', '0', '◈', '∥', '⊠']
+block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS']
+block_count = [0, 0, 0, 0, 0, 0]
 Enemy_Bed = None
 Your_Bed = None
 G1 = 0
@@ -424,11 +424,11 @@ if gamemode == 'bedwars':
 x_pos = (place % (game_size**2)) % game_size - int(np.floor(game_size/2))
 y_pos = -1 * ((place % (game_size**2)) // game_size) + int(np.floor(game_size/2))
 while i < 999:
-    if game[(place + game_size) % (game_size**2)] != '▪' and game[(place + game_size) % (game_size**2)] != '|' and game[(place + game_size) % (game_size**2)] != '0' and game[(place + game_size) % (game_size**2)] != '◈' and game[(place + game_size) % (game_size**2)] != '∥' and not place + 2*game_size > game_size**2-1:
+    if not block_types.__contains__(game[(place + game_size) % (game_size**2)]) and not place + 2*game_size > game_size**2-1:
         touching_ground = False
     else:
         touching_ground = True
-        if not game[place - game_size] == '▪' and not game[place - game_size] == '|' and game[place - game_size] == '0' and game[place - game_size] == '◈' and game[place - game_size] == '∥' and last_move == '':
+        if not block_types.__contains__([place - game_size]) and last_move == '':
             up_speed = 0
     for message in chat:
         print(message)
@@ -484,7 +484,7 @@ while i < 999:
         try:
             place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
             if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
-                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks? ')
+                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests? ')
                 for i in range(len(block_count)):
                     if block.upper() == block_names[i]:
                         if block_count[i] > 0:
@@ -533,7 +533,7 @@ while i < 999:
         while i < up_speed:
             game[place % (game_size**2)] = ' '
             place -= game_size
-            if game[place] != '▪' and game[place] != '|' and game[place] != '0' and game[place] != '◈' and game[place] != '∥' and place - game_size >= 0:
+            if not block_types.__contains__(game[place]) and place - game_size >= 0:
                 game[place] = '🙂'
             else:
                 place += game_size
@@ -543,7 +543,7 @@ while i < 999:
         while i < -1 * up_speed:
             game[place % (game_size**2)] = ' '
             place += game_size
-            if game[place] != '▪' and game[place] != '|' and game[place] != '0' and game[place] != '◈' and game[place] != '∥' and place + game_size < game_size**2:
+            if not block_types.__contains__(game[place]) and place + game_size < game_size**2:
                 game[place] = '🙂'
             else:
                 place -= game_size
@@ -553,16 +553,16 @@ while i < 999:
         up_speed -= 1
     x_pos = int((place % (game_size**2)) % game_size - np.floor(game_size/2))
     y_pos = int(-1 * ((place % (game_size**2)) // game_size) + np.floor(game_size/2))
-    if gamemode == 'skywars' and place + 2*game_size > game_size**2-1 and game[(place + game_size) % (game_size**2)] != '▪' and game[(place + game_size) % (game_size**2)] != '|' and game[(place + game_size) % (game_size**2)] != '0' and game[(place + game_size) % (game_size**2)] != '◈' and game[(place + game_size) % (game_size**2)] != '∥':
+    if gamemode == 'skywars' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
         print('You Died! You fell into the void!')
         break
-    if gamemode == 'parkour' and place + 2*game_size > game_size**2-1 and game[(place + game_size) % (game_size**2)] != '▪' and game[(place + game_size) % (game_size**2)] != '|' and game[(place + game_size) % (game_size**2)] != '0' and game[(place + game_size) % (game_size**2)] != '◈' and game[(place + game_size) % (game_size**2)] != '∥':
+    if gamemode == 'parkour' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
         print('You Died! You fell into the void!')
         break
-    if gamemode == 'bedwars' and Your_Bed is False and place + 2*game_size > game_size**2-1 and game[(place + game_size) % (game_size**2)] != '▪' and game[(place + game_size) % (game_size**2)] != '|' and game[(place + game_size) % (game_size**2)] != '0' and game[(place + game_size) % (game_size**2)] != '◈' and game[(place + game_size) % (game_size**2)] != '∥':
+    if gamemode == 'bedwars' and Your_Bed is False and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
         print('You Died! You fell into the void!')
         break
-    if gamemode == 'bedwars' and Your_Bed is True and place + 2*game_size > game_size**2-1 and game[(place + game_size) % (game_size**2)] != '▪' and game[(place + game_size) % (game_size**2)] != '|' and game[(place + game_size) % (game_size**2)] != '0' and game[(place + game_size) % (game_size**2)] != '◈' and game[(place + game_size) % (game_size**2)] != '∥':
+    if gamemode == 'bedwars' and Your_Bed is True and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
         game[place] = ' '
         place = 401
         game[place] = '🙂'
@@ -613,5 +613,5 @@ while i < 999:
         Your_Bed = False
         game[406-294] = ' '
         Enemy_Bed = False
-print('Process finished with exit code 69420')
+print('Process finished with exit code 69421')
 exit("RED TEXT >:)")
