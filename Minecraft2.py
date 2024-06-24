@@ -262,8 +262,9 @@ Enemy_Bed = None
 Your_Bed = None
 G1 = 0
 G2 = 0
+chest_items = {}
 if gamemode == 'skywars' or gamemode == 'bedwars':
-    block_count[0:2] = 1000000
+    block_count[0:2] = 1000000, 1000000
     user_domain = random.randint(1, 7)
     if user_domain == 1:
         user_domain = "01'er"
@@ -475,6 +476,8 @@ while i < 999:
                         if game[place_break] == '0' and random.randint(1, 6) == 1:
                             block_count[2] -= 1
                             Saplings += 1
+                        if game[place_break] == '⊠':
+                            del chest_items[place_break]
                         game[place_break] = ' '
                         break
         except ValueError:
@@ -494,6 +497,10 @@ while i < 999:
                 if block.upper() == 'SAPLINGS' and Saplings > 0:
                     spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
                     Saplings -= 1
+                if block.upper() == 'CHESTS':
+                    chest_items[place_break] = []
+                    for i in range(len(block_count)):
+                        chest_items[place_break].append(0)
         except ValueError:
             pass
     elif move.upper() == 'CHAT':
