@@ -481,6 +481,9 @@ while i < 999:
                             block_count[2] -= 1
                             Saplings += 1
                         if game[place_break] == '⊠':
+                            for j in range(len(block_count)):
+                                block_count[j] += chest_items[place_break][j]
+                            Saplings += chest_items[place_break][len(block_count) + 0]
                             del chest_items[place_break]
                         game[place_break] = ' '
                         break
@@ -532,7 +535,7 @@ while i < 999:
             Lotteries -= 50
     elif move.upper() == 'CRAFT' and gamemode == 'peaceful':
         print('Crafting Recipes:')
-        print('1. 1 wood -> 4 planks')
+        print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest')
         craft = input('Which recipe you want to craft? (Choose Number) ')
         if craft == '1':
             craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -540,38 +543,55 @@ while i < 999:
                 if block_count[1] >= 1 * int(craft_count):
                     block_count[1] -= 1 * int(craft_count)
                     block_count[4] += 4 * int(craft_count)
+        if craft == '2':
+            craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+            if craft_count.isdigit():
+                if block_count[4] >= 8 * int(craft_count):
+                    block_count[4] -= 8 * int(craft_count)
+                    block_count[5] += 1 * int(craft_count)
     elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and gamemode == 'peaceful':
         x = input('x? ')
         y = input('y? ')
         try:
             place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
-            if chest_items.__contains__(place_break):
-                summary = 'Chest contains: '
+            if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and chest_items.__contains__(place_break):
+                chest_summary = 'Chest contains: '
                 for i in range(len(block_count)):
-                    summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
-                print(f'Chest contains: {chest_items[place_break]}')
+                    chest_summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
+                chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
+                print(f'Player: {summary}')
+                print(chest_summary)
                 for i in range(len(block_count)):
-                    item_count = int(input(f'How much/many {block_names[i].lower()} do you want to put in the chest?'))
+                    item_count = int(input(f'How much/many {block_names[i].lower()} do you want to put in the chest? '))
                     if item_count <= block_count[i]:
                         block_count[i] -= item_count
                         chest_items[place_break][i] += item_count
-                item_count = int(input(f'How many saplings do you want to put in the chest?'))
+                item_count = int(input(f'How many saplings do you want to put in the chest? '))
                 if item_count <= Saplings:
                     Saplings -= item_count
-                    chest_items[place_break][3] += item_count
-                summary = 'Chest contains: '
+                    chest_items[place_break][len(block_count) + 0] += item_count
+                chest_summary = 'Chest contains: '
                 for i in range(len(block_count)):
-                    summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
-                print(f'Chest contains: {chest_items[place_break]}')
+                    chest_summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
+                chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
+                summary = 'Inventory: '
+                for index in range(len(block_count)):
+                    summary += f'{block_count[index]} {block_names[index].lower()}, '
+                    if index == 1:
+                        summary += f'{Lotteries} lotteries, '
+                    if index == 2:
+                        summary += f'{Saplings} saplings, '
+                print(f'Player: {summary}')
+                print(chest_summary)
                 for i in range(len(block_count)):
-                    item_count = int(input(f'How much/many {block_names[i].lower()} do you want to take from the chest?'))
-                    if item_count <= block_count[i]:
-                        block_count[i] -= item_count
-                        chest_items[place_break][i] += item_count
-                item_count = int(input(f'How many saplings do you want to take from the chest?'))
-                if item_count <= Saplings:
-                    Saplings -= item_count
-                    chest_items[place_break][3] += item_count
+                    item_count = int(input(f'How much/many {block_names[i].lower()} do you want to take from the chest? '))
+                    if item_count <= chest_items[place_break][i]:
+                        block_count[i] += item_count
+                        chest_items[place_break][i] -= item_count
+                item_count = int(input(f'How many saplings do you want to take from the chest? '))
+                if item_count <= chest_items[place_break][len(block_count) + 0]:
+                    Saplings += item_count
+                    chest_items[place_break][len(block_count) + 0] -= item_count
         except ValueError:
             pass
     game[place % (game_size**2)] = ' '
