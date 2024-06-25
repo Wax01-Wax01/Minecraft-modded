@@ -249,7 +249,7 @@ if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
     Server = input('What do you want your server name to be? ')
 else:
     Your_Server = False
-chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip: ▪ = grass, | = wood, 0 = leaves, ◈ = stone, ∥ = planks']
+chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip: ▪ = grass, | = wood, 0 = leaves, ◈ = stone, ∥ = planks, ⊠ = chests, ∷ = coal, ⍠ = iron, ⌘ = gold']
 i = 1
 up_speed = 0
 last_tree = -5
@@ -257,9 +257,9 @@ Lotteries = 1
 Saplings = 0
 y_terrain = 10
 Server_Views = 0
-block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠']
-block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON ORE']
-block_count = [0, 0, 0, 0, 0, 0, 0, 0]
+block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆']
+block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS']
+block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Enemy_Bed = None
 Your_Bed = None
 G1 = 0
@@ -319,10 +319,14 @@ if gamemode == 'peaceful':
         while j >= 0:
             if y_terrain - j > random.randint(4, 5):
                 game[place] = '◈'
-                if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 5))))) == 1:
+                if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 9))))) == 1:
                     game[place] = '∷'
-                if random.randint(1, int(np.round(1.3 ** (float(abs(16 - (y_terrain - j)) + 5))))) == 1:
+                if random.randint(1, int(np.round(1.3 ** (float(abs(16 - (y_terrain - j)) + 9))))) == 1:
                     game[place] = '⍠'
+                if random.randint(1, int(np.round(1.3 ** (float(abs(23 - (y_terrain - j)) + 9))))) == 1:
+                    game[place] = '⌘'
+                if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
+                    game[place] = '◆'
             else:
                 game[place] = '▪'
             place += game_size
@@ -502,7 +506,7 @@ while i < 999:
         try:
             place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
             if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
-                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests? ')
+                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds? ')
                 for i in range(len(block_count)):
                     if block.upper() == block_names[i]:
                         if block_count[i] > 0:
