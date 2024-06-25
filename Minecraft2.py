@@ -3,6 +3,8 @@ import numpy as np
 
 # Liyong Wang want to join in this project (6/24/2024)
 # blocks: ◈ is stone
+# Character Length test (1): aaaaaaaaaa
+# Character Length test (2):
 Time_Spent = 0
 game_size = 21
 
@@ -255,9 +257,9 @@ Lotteries = 1
 Saplings = 0
 y_terrain = 10
 Server_Views = 0
-block_types = ['▪', '|', '0', '◈', '∥', '⊠']
-block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS']
-block_count = [0, 0, 0, 0, 0, 0]
+block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷']
+block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL']
+block_count = [0, 0, 0, 0, 0, 0, 0]
 Enemy_Bed = None
 Your_Bed = None
 G1 = 0
@@ -317,6 +319,8 @@ if gamemode == 'peaceful':
         while j >= 0:
             if y_terrain - j > random.randint(4, 5):
                 game[place] = '◈'
+                if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 5))))) == 1:
+                    game[place] = '∷'
             else:
                 game[place] = '▪'
             place += game_size
