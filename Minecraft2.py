@@ -380,6 +380,7 @@ if gamemode == 'parkour':
 if gamemode == '837uc41nnc39crn' and username == 'Wax01':
     ban_user()
 if gamemode == 'bedwars':
+    block_count[0] = 0
     block_count[1] = 5
     Lotteries = 0
     game[420:430] = '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪'
