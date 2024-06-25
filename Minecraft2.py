@@ -257,9 +257,9 @@ Lotteries = 1
 Saplings = 0
 y_terrain = 10
 Server_Views = 0
-block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷']
-block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL']
-block_count = [0, 0, 0, 0, 0, 0, 0]
+block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠']
+block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON ORE']
+block_count = [0, 0, 0, 0, 0, 0, 0, 0]
 Enemy_Bed = None
 Your_Bed = None
 G1 = 0
@@ -321,6 +321,8 @@ if gamemode == 'peaceful':
                 game[place] = '◈'
                 if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 5))))) == 1:
                     game[place] = '∷'
+                if random.randint(1, int(np.round(1.3 ** (float(abs(16 - (y_terrain - j)) + 5))))) == 1:
+                    game[place] = '⍠'
             else:
                 game[place] = '▪'
             place += game_size
