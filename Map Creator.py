@@ -4,6 +4,17 @@ Welcome to the Minecraft Map creator.
 In this file, you can design maps for gamemodes!!!
 """
 
+# a, c, e, i, k, o, p, r, s
+binary_capital_letter_codes_rps = {
+    'A': '010101111101101',
+    'C': '011100100100011'
+}
+
+
+def display_rps(player, rps_run):  # If real player, set player to 0, else set player to 1.
+    pass
+
+
 game = []
 for i in range(2601):
     game += [' ']
@@ -38,6 +49,18 @@ game[2543] = '⊠'
 game[2486] = '◆'
 game[2489] = '◆'
 game[2387] = '◆'
+game[104], game[106], game[155], game[157], game[207], game[258], game[309] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+game[109], game[159], game[161], game[210], game[212], game[261], game[263], game[313] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+game[112], game[114], game[163], game[165], game[214], game[216], game[265], game[267], game[316], game[317], game[318] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+game[717], game[718], game[767], game[818], game[869], game[921], game[922] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+game[720], game[721], game[771], game[773], game[822], game[823], game[873], game[924] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+game[724], game[726], game[775], game[777], game[826], game[828], game[877], game[879], game[928], game[929], game[930] = \
+    '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
 k = 0
 while k < 51:
     print(game[k * 51: (k + 1) * 51])
