@@ -249,7 +249,7 @@ if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
     Server = input('What do you want your server name to be? ')
 else:
     Your_Server = False
-chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip: ▪ = grass, | = wood, 0 = leaves, ◈ = stone, ∥ = planks, ⊠ = chests, ∷ = coal, ⍠ = iron, ⌘ = gold']
+chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip: ▪ = grass, | = wood, 0 = leaves, ◈ = stone, ∥ = planks, ⊠ = chests, ∷ = coal, ⍠ = iron, ⌘ = gold, ◆ = diamonds']
 i = 1
 up_speed = 0
 last_tree = -5
