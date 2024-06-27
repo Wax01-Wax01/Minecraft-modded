@@ -7,12 +7,36 @@ In this file, you can design maps for gamemodes!!!
 # a, c, e, i, k, o, p, r, s
 binary_capital_letter_codes_rps = {
     'A': '010101111101101',
-    'C': '011100100100011'
+    'C': '011100100100011',
+    'E': '111100111100111',
+    'I': '111010010010111',
+    'K': '101101110101101',
+    'O': '010101101101010',
+    'P': '110101110100100',
+    'R': '110101110101101',
+    'S': '011100010001110'
 }
 
 
+def display_char(left_corner_place, character_display):
+    x_display = 0
+    y_display = 0
+    index_display = 0
+    for y_axis_change in range(5):
+        for x_axis_change in range(3):
+            if list(binary_capital_letter_codes_rps[character_display])[index_display] == '1':
+                game[left_corner_place + x_display + y_display * 51] = '◆'
+            x_display += 1
+            index_display += 1
+        x_display = 0
+        y_display += 1
+
+
 def display_rps(player, rps_run):  # If real player, set player to 0, else set player to 1.
-    pass
+    index_char_displaying = 0
+    for character_to_display in list(rps_run):
+        display_char(410 + player * 612 + index_char_displaying * 4, character_to_display)
+        index_char_displaying += 1
 
 
 game = []
@@ -61,6 +85,7 @@ game[720], game[721], game[771], game[773], game[822], game[823], game[873], gam
     '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
 game[724], game[726], game[775], game[777], game[826], game[828], game[877], game[879], game[928], game[929], game[930] = \
     '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+display_rps(0, 'PAPER')
 k = 0
 while k < 51:
     print(game[k * 51: (k + 1) * 51])
