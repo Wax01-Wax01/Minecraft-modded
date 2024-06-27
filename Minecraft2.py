@@ -9,6 +9,47 @@ Time_Spent = 0
 game_size = 21
 
 
+binary_capital_letter_codes_rps = {
+    'A': '010101111101101',
+    'C': '011100100100011',
+    'E': '111100111100111',
+    'I': '111010010010111',
+    'K': '101101110101101',
+    'O': '010101101101010',
+    'P': '110101110100100',
+    'R': '110101110101101',
+    'S': '011100010001110'
+}
+
+
+def clear_range(start, end):
+    game_index = start
+    while game_index < end:
+        game[game_index] = ' '
+        game_index += 1
+
+
+def display_char(left_corner_place, character_display):
+    x_display = 0
+    y_display = 0
+    index_display = 0
+    for y_axis_change in range(5):
+        for x_axis_change in range(3):
+            if list(binary_capital_letter_codes_rps[character_display])[index_display] == '1':
+                game[left_corner_place + x_display + y_display * 51] = '◆'
+            x_display += 1
+            index_display += 1
+        x_display = 0
+        y_display += 1
+
+
+def display_rps(player, rps_run):  # If real player, set player to 0, else set player to 1.
+    index_char_displaying = 0
+    for character_to_display in list(rps_run):
+        display_char(410 + player * 612 + index_char_displaying * 4, character_to_display)
+        index_char_displaying += 1
+
+
 def login():
     user_credentials = {'Wax01': 'TheSST!!!!!', 'max': "i am stupid"}
     if user_credentials.keys().__contains__(username):
@@ -242,13 +283,16 @@ if user.upper() == 'Y' or user.upper() == 'YES':
 login()
 print(f'Hello {username}!')
 Server = int(np.round(10 ** random.uniform(0, 10)))
-gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars? ')
+gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps)? ')
 if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
     Your_Server = True
     gamemode = 'peaceful'
     Server = input('What do you want your server name to be? ')
 else:
     Your_Server = False
+gamemode = gamemode.lower()
+if gamemode == 'rps':
+    gamemode = 'rock paper scissors'
 chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip: ▪ = grass, | = wood, 0 = leaves, ◈ = stone, ∥ = planks, ⊠ = chests, ∷ = coal, ⍠ = iron, ⌘ = gold, ◆ = diamonds']
 i = 1
 up_speed = 0
@@ -265,7 +309,7 @@ Your_Bed = None
 G1 = 0
 G2 = 0
 chest_items = {}
-if gamemode == 'skywars' or gamemode == 'bedwars':
+if gamemode.upper() == 'SKYWARS' or gamemode.upper() == 'BEDWARS':
     block_count[0:2] = 1000000, 1000000
     user_domain = random.randint(1, 7)
     if user_domain == 1:
@@ -290,7 +334,7 @@ while i <= 441:
     game.append(' ')
     i += 1
 i = 0
-if gamemode == 'peaceful':
+if gamemode.upper() == 'PEACEFUL':
     game_size = int(input('How big do u want ur world 2 b??? '))
     y_terrain = int(np.floor(game_size/2))
     game = []
@@ -341,7 +385,7 @@ if gamemode == 'peaceful':
     game[(game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size] = '🙂'
     place = (game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size
 touching_ground = True
-if gamemode == 'skywars':
+if gamemode.upper() == 'SKYWARS':
     game[420:427] = '▪', '▪', '▪', '▪', '▪', '▪', '▪'
     game[400] = '🙂'
     game[315:319] = '▪', '▪', '▪', '▪'
@@ -353,7 +397,7 @@ if gamemode == 'skywars':
     game[38] = '▪'
     game[59] = '▪'
     place = 400
-if gamemode == 'parkour':
+if gamemode.upper() == 'PARKOUR':
     game[399] = '🙂'
     game[420] = '▪'
     game[422] = '▪'
@@ -389,7 +433,7 @@ if gamemode == 'parkour':
         pass
 if gamemode == '837uc41nnc39crn' and username == 'Wax01':
     ban_user()
-if gamemode == 'bedwars':
+if gamemode.upper() == 'BEDWARS':
     block_count[0] = 0
     block_count[1] = 5
     Lotteries = 0
@@ -434,6 +478,74 @@ if gamemode == 'bedwars':
     Your_Bed = True
     G1 = 0
     G2 = 0
+if gamemode.upper() == 'RPS' or gamemode.upper() == 'ROCK PAPER SCISSORS':
+    user_domain = random.randint(1, 7)
+    if user_domain == 1:
+        user_domain = "01'er"
+    if user_domain == 2:
+        user_domain = "Wax01_g0t_"
+    if user_domain == 3:
+        user_domain = "1n54n1t4-"
+    if user_domain == 4:
+        user_domain = "G0d_play3r"
+    if user_domain == 5:
+        user_domain = "1nsane_gmr"
+    if user_domain == 6:
+        user_domain = "L0L_C4P-S"
+    if user_domain == 7:
+        user_domain = "Anti09'er"
+    user_id = random.randint(1000, 9999)
+    enemy_name = user_domain + str(user_id)
+    chat.append(f"{enemy_name}: I'm good at rock paper scissors!!!")
+    game = []
+    while i <= 2601:
+        game.append(' ')
+        i += 1
+    i = 0
+    game_size = 51
+    place = 2504
+    game[2503] = '🙂'
+    game[2551:2558] = '∥', '∥', '∥', '∥', '∥', '∥', '∥'
+    game[2296], game[2302], game[2347], game[2353], game[2398], game[2404], game[2449], game[2455], game[2500] = \
+        '|', '|', '|', '|', '|', '|', '|', '|', '|'
+    game[2558:2565] = '▪', '▪', '▪', '▪', '▪', '▪', '▪'
+    game[2245:2252] = game[2551:2558]
+    game[2501:2503] = '◈', '◈'
+    game[2504] = '⊠'
+    game[2509:2512] = '◆', '◆', '◆'
+    game[2459] = '◆'
+    game[2456] = '◆'
+    game[2354] = '◆'
+    game[2196:2200] = '⌘', '⌘', '⌘', '⌘', '⌘'
+    game[2146:2149] = '⌘', '⌘', '⌘'
+    game[2096] = '⌘'
+    game[2592:2599] = game[2552:2559]
+    game[2585:2592] = game[2559:2566]
+    game[2286:2293] = game[2246:2253]
+    game[2236:2241] = game[2196:2201]
+    game[2186:2189] = game[2146:2149]
+    game[2136] = '⌘'
+    game[2337], game[2343], game[2388], game[2394], game[2439], game[2445], game[2490], game[2496], game[2547] = \
+        '|', '|', '|', '|', '|', '|', '|', '|', '|'
+    game[2545:2547] = '◈', '◈'
+    game[2544] = '☹️'
+    game[2536:2539] = game[2510:2513]
+    game[2543] = '⊠'
+    game[2486] = '◆'
+    game[2489] = '◆'
+    game[2387] = '◆'
+    game[104], game[106], game[155], game[157], game[207], game[258], game[309] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+    game[109], game[159], game[161], game[210], game[212], game[261], game[263], game[313] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+    game[112], game[114], game[163], game[165], game[214], game[216], game[265], game[267], game[316], game[317], game[318] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+    game[717], game[718], game[767], game[818], game[869], game[921], game[922] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+    game[720], game[721], game[771], game[773], game[822], game[823], game[873], game[924] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
+    game[724], game[726], game[775], game[777], game[826], game[828], game[877], game[879], game[928], game[929], game[930] = \
+        '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
 x_pos = (place % (game_size**2)) % game_size - int(np.floor(game_size/2))
 y_pos = -1 * ((place % (game_size**2)) // game_size) + int(np.floor(game_size/2))
 while i < 999:
@@ -458,15 +570,22 @@ while i < 999:
             summary += f'{Saplings} saplings, '
     print(summary)
     print(str(x_pos) + ", " + str(y_pos))
+    if gamemode == 'rock paper scissors':
+        clear_range(408, 665)
+        clear_range(1020, 1277)
     if Your_Server is True:
         print(f'Your server has {Server_Views} views!')
     if gamemode == 'bedwars' and -9 <= x_pos <= -6 and (-9 <= y_pos <= -6 or 5 <= y_pos <= 8):
         move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or buy something (bs)? ")
     else:
-        if gamemode != 'peaceful':
-            move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
-        else:
+        if gamemode == 'peaceful':
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac)? ")
+        elif gamemode == 'parkour':
+            move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
+        elif gamemode == 'rock paper scissors':
+            move = input("Do u want 2 jump (w), move left (a) or move right (d) or chat or gamble or play rock paper scissors (prps)? ")
+        else:
+            move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
     last_move = ''
     if (move.upper() == 'JUMP' or move.upper() == ' ' or move.upper() == 'W') and touching_ground is True:
         up_speed = 1
@@ -479,7 +598,7 @@ while i < 999:
         game[place % (game_size**2)] = ' '
         place += 1
         game[place % (game_size**2)] = '🙂'
-    elif (move.upper() == 'BAB' or move.upper() == 'BREAK A BLOCK') and gamemode != 'parkour':
+    elif (move.upper() == 'BAB' or move.upper() == 'BREAK A BLOCK') and gamemode != 'parkour' and gamemode != 'rock paper scissors':
         x = input('x? ')
         y = input('y? ')
         try:
@@ -500,7 +619,7 @@ while i < 999:
                         break
         except ValueError:
             pass
-    elif move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK':
+    elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors':
         x = input('x? ')
         y = input('y? ')
         try:
@@ -605,6 +724,26 @@ while i < 999:
                     chest_items[place_break][len(block_count) + 0] -= item_count
         except ValueError:
             pass
+    elif (move.upper() == 'PRPS' or move.upper() == 'PLAY ROCK PAPER SCISSORS') and gamemode == 'rock paper scissors':
+        rps_move = input('Do you want to play rock (r), paper (p), or scissors (s)? ')
+        if rps_move.upper() == 'R' or rps_move.upper() == 'ROCK':
+            rps_move = 'ROCK'
+        if rps_move.upper() == 'P' or rps_move.upper() == 'PAPER':
+            rps_move = 'PAPER'
+        if rps_move.upper() == 'S' or rps_move.upper() == 'SCISSORS':
+            rps_move = 'SCISSORS'
+        if ['ROCK', 'PAPER', 'SCISSORS'].__contains__(rps_move):
+            cpu_rps_move = random.choice(['ROCK', 'PAPER', 'SCISSORS'])
+            display_rps(0, rps_move)
+            display_rps(1, cpu_rps_move)
+            chat.append(f'{username}: {rps_move.lower().capitalize()}!')
+            chat.append(f'{enemy_name}: {cpu_rps_move.lower().capitalize()}!')
+            if rps_move == cpu_rps_move:
+                chat.append('Server: Tie!')
+            elif (rps_move == 'ROCK' and cpu_rps_move == 'SCISSORS') or (rps_move == 'PAPER' and cpu_rps_move == 'ROCK') or (rps_move == 'SCISSORS' and cpu_rps_move == 'PAPER'):
+                chat.append(f'Server: {username} wins!')
+            else:
+                chat.append(f'Server: {enemy_name} wins!')
     game[place % (game_size**2)] = ' '
     if up_speed > 0:
         i = 0
@@ -691,5 +830,9 @@ while i < 999:
         Your_Bed = False
         game[406-294] = ' '
         Enemy_Bed = False
+    if gamemode == 'rock paper scissors' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
+        game[place] = ' '
+        place = 2504
+        game[place] = '🙂'
 print('Process finished with exit code 69421')
 exit("RED TEXT >:)")

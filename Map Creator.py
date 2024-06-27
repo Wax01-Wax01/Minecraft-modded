@@ -85,7 +85,6 @@ game[720], game[721], game[771], game[773], game[822], game[823], game[873], gam
     '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
 game[724], game[726], game[775], game[777], game[826], game[828], game[877], game[879], game[928], game[929], game[930] = \
     '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
-display_rps(0, 'PAPER')
 k = 0
 while k < 51:
     print(game[k * 51: (k + 1) * 51])
