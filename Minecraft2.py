@@ -21,6 +21,18 @@ binary_capital_letter_codes_rps = {
     'S': '011100010001110'
 }
 
+vill_house = [
+    [' '], [' '], [' '], ['∥'], [' '], [' '], [' '],
+    [' '], [' '], ['∥'], [' '], ['∥'], [' '], [' '],
+    [' '], ['∥'], [' '], [' '], [' '], ['∥'], [' '],
+    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
+    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
+    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
+    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
+    [' '], [' '], ['⊠'], [' '], ['◈'], ['◈'], [' '],
+    ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'],
+]
+
 
 def clear_range(start, end):
     game_index = start
@@ -244,6 +256,13 @@ def spawn_tree(x, y):
         game[place - (game_size - 1)] = '0'
     if place - 2*game_size >= 1:
         game[place - 2*game_size] = '0'
+
+
+def spawn_village_house(x, y):  # Not Done
+    place = (game_size**2-int(np.ceil(game_size/2))) + x - y * game_size
+    """
+    Add more code later!
+    """
 
 
 def ban_user():
