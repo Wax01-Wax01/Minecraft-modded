@@ -7,6 +7,7 @@ import numpy as np
 # Character Length test (2):
 Time_Spent = 0
 game_size = 21
+vill_houses = {}
 
 
 binary_capital_letter_codes_rps = {
@@ -22,15 +23,15 @@ binary_capital_letter_codes_rps = {
 }
 
 vill_house = [
-    [' '], [' '], [' '], ['∥'], [' '], [' '], [' '],
-    [' '], [' '], ['∥'], [' '], ['∥'], [' '], [' '],
-    [' '], ['∥'], [' '], [' '], [' '], ['∥'], [' '],
-    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
-    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
-    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
-    ['|'], [' '], [' '], [' '], [' '], [' '], ['|'],
-    [' '], [' '], ['⊠'], [' '], ['◈'], ['◈'], [' '],
-    ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'],
+    ' ', ' ', ' ', '∥', ' ', ' ', ' ',
+    ' ', ' ', '∥', ' ', '∥', ' ', ' ',
+    ' ', '∥', ' ', ' ', ' ', '∥', ' ',
+    '|', ' ', ' ', ' ', ' ', ' ', '|',
+    '|', ' ', ' ', ' ', ' ', ' ', '|',
+    '|', ' ', ' ', ' ', ' ', ' ', '|',
+    '|', ' ', ' ', ' ', ' ', ' ', '|',
+    ' ', ' ', '⊠', '◈', '◈', ' ', ' ',
+    '∥', '∥', '∥', '∥', '∥', '∥', '∥',
 ]
 
 
@@ -244,22 +245,36 @@ def spawn_tree(x, y):
         game[place - 1] = '0'
     if place + 1 >= 1:
         game[place + 1] = '0'
-    if place + (game_size - 1) >= 1:
+    if place + (game_size - 1) >= 0:
         game[place + (game_size - 1)] = '0'
-    if place + (game_size + 1) >= 1:
+    if place + (game_size + 1) >= 0:
         game[place + (game_size + 1)] = '0'
-    if place - game_size >= 1:
+    if place - game_size >= 0:
         game[place - game_size] = '0'
-    if place - (game_size + 1) >= 1:
+    if place - (game_size + 1) >= 0:
         game[place - (game_size + 1)] = '0'
-    if place - (game_size - 1) >= 1:
+    if place - (game_size - 1) >= 0:
         game[place - (game_size - 1)] = '0'
-    if place - 2*game_size >= 1:
+    if place - 2*game_size >= 0:
         game[place - 2*game_size] = '0'
 
 
 def spawn_village_house(x, y):  # Not Done
     place = (game_size**2-int(np.ceil(game_size/2))) + x - y * game_size
+    increase_place = game_size * -8 - 3
+    increment_block = 0
+    for y_change in range(9):
+        for x_change in range(7):
+            if game_size ** 2 > place + increase_place >= 0:
+                game[place + increase_place] = vill_house[increment_block]
+            increment_block += 1
+            increase_place += 1
+        increase_place += game_size - 7
+    chest_items[place - game_size - 1] = []
+    for i in range(len(block_count)):
+        chest_items[place - game_size - 1].append(0)
+    chest_items[place - game_size - 1].append(0)  # Saplings
+
     """
     Add more code later!
     """
@@ -316,6 +331,7 @@ chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', 'Tip
 i = 1
 up_speed = 0
 last_tree = -5
+last_vill_house = -15
 Lotteries = 1
 Saplings = 0
 y_terrain = 10
@@ -398,9 +414,15 @@ if gamemode.upper() == 'PEACEFUL':
         if tree == 1 and i != np.floor(game_size/2):
             last_tree = i
             spawn_tree(i - (int(np.floor(game_size/2))), y_terrain)
+        vill_house_random = random.randint(1, 35 - (i - last_vill_house))
+        if vill_house_random == 1 and abs(i - np.floor(game_size/2)) > 3:
+            last_vill_house = i
+            vill_houses[i - (int(np.floor(game_size/2)))] = y_terrain
         if i == np.floor(game_size/2):
             ytm = y_terrain
         i += 1
+    for vill_house_x, vill_house_y in vill_houses.items():
+        spawn_village_house(vill_house_x, vill_house_y)
     game[(game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size] = '🙂'
     place = (game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size
 touching_ground = True
