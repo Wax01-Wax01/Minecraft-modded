@@ -274,6 +274,57 @@ def spawn_village_house(x, y):  # Not Done
     for i in range(len(block_count)):
         chest_items[place - game_size - 1].append(0)
     chest_items[place - game_size - 1].append(0)  # Saplings
+    x_block_place = -3
+    for block_col in range(7):
+        block_place = place + x_block_place + game_size
+        while True:
+            if block_place < game_size ** 2:
+                if game[block_place] == ' ':
+                    game[block_place] = '▪'
+                else:
+                    break
+            else:
+                break
+            block_place += game_size
+        x_block_place += 1
+    x_block_place = -3
+    for block_col in range(7):
+        block_place = place + x_block_place - 9 * game_size
+        while True:
+            if block_place >= 0:
+                if game[block_place] != ' ':
+                    game[block_place] = ' '
+                else:
+                    break
+            else:
+                break
+            block_place -= game_size
+        x_block_place += 1
+    for x_offset in [-4, 4]:
+        block_place = place + x_offset - game_size
+        if game[block_place] != ' ':
+            while True:
+                if block_place >= 0:
+                    if game[block_place] != ' ':
+                        game[block_place] = ' '
+                    else:
+                        break
+                else:
+                    break
+                block_place -= game_size
+        else:
+            block_place += game_size
+            while True:
+                if block_place < game_size ** 2:
+                    if game[block_place] == ' ':
+                        game[block_place] = '▪'
+                    else:
+                        break
+                else:
+                    break
+                block_place += game_size
+
+
 
     """
     Add more code later!
@@ -415,7 +466,7 @@ if gamemode.upper() == 'PEACEFUL':
             last_tree = i
             spawn_tree(i - (int(np.floor(game_size/2))), y_terrain)
         vill_house_random = random.randint(1, 35 - (i - last_vill_house))
-        if vill_house_random == 1 and abs(i - np.floor(game_size/2)) > 3:
+        if vill_house_random == 1 and abs(i - np.floor(game_size/2)) > 3 and i - last_vill_house >= 9:
             last_vill_house = i
             vill_houses[i - (int(np.floor(game_size/2)))] = y_terrain
         if i == np.floor(game_size/2):
