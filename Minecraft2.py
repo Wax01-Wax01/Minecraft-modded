@@ -274,6 +274,14 @@ def spawn_village_house(x, y):  # Not Done
     for i in range(len(block_count)):
         chest_items[place - game_size - 1].append(0)
     chest_items[place - game_size - 1].append(0)  # Saplings
+    chest_items[place - game_size - 1][1] = random.randint(2, 7)
+    chest_items[place - game_size - 1][2] = random.randint(5, 13)
+    chest_items[place - game_size - 1][3] = random.randint(1, 4)
+    chest_items[place - game_size - 1][4] = random.randint(5, 11)
+    chest_items[place - game_size - 1][6] = random.randint(0, 3)
+    chest_items[place - game_size - 1][7] = random.randint(0, 4)
+    chest_items[place - game_size - 1][8] = random.randint(0, 2)
+    chest_items[place - game_size - 1][9] = random.randint(0, 2)
     x_block_place = -3
     for block_col in range(7):
         block_place = place + x_block_place + game_size
@@ -323,12 +331,6 @@ def spawn_village_house(x, y):  # Not Done
                 else:
                     break
                 block_place += game_size
-
-
-
-    """
-    Add more code later!
-    """
 
 
 def ban_user():
