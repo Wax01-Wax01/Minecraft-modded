@@ -389,9 +389,9 @@ Lotteries = 1
 Saplings = 0
 y_terrain = 10
 Server_Views = 0
-block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆']
-block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS']
-block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛']
+block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS']
+block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Enemy_Bed = None
 Your_Bed = None
 G1 = 0
@@ -719,7 +719,7 @@ while i < 999:
         try:
             place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
             if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
-                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds? ')
+                block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs? ')
                 for i in range(len(block_count)):
                     if block.upper() == block_names[i]:
                         if block_count[i] > 0:
@@ -759,7 +759,7 @@ while i < 999:
             Lotteries -= 50
     elif move.upper() == 'CRAFT' and gamemode == 'peaceful':
         print('Crafting Recipes:')
-        print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest')
+        print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction)')
         craft = input('Which recipe you want to craft? (Choose Number) ')
         if craft == '1':
             craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -773,6 +773,16 @@ while i < 999:
                 if block_count[4] >= 8 * int(craft_count):
                     block_count[4] -= 8 * int(craft_count)
                     block_count[5] += 1 * int(craft_count)
+        if craft == '3':
+            print('Stair types: 1. Upright Stairs, 2. Upleft Stairs, 3. Downright Stairs, 4. Downleft Stairs')
+            stair_type = input('Which stair type you want to craft? (Choose Number) ')
+            craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+            if craft_count.isdigit() and stair_type.isdigit():
+                if 4 >= int(stair_type) >= 1:
+                    if block_count[4] >= 3 * int(craft_count):
+                        block_count[4] -= 3 * int(craft_count)
+                        block_count[9 + int(stair_type)] += 1 * int(craft_count)
+
     elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and gamemode == 'peaceful':
         x = input('x? ')
         y = input('y? ')
