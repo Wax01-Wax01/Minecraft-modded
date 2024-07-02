@@ -5,10 +5,11 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
-Current version: V4.1.3
+Current version: V4.2
 
 | Version | Supported          |
 | ------- | ------------------ |
+| 4.2     | ✅                 |
 | 4.1.x   | :white_check_mark: |
 | < 4.1   | :x:                |
 
