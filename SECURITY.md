@@ -5,7 +5,7 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
-Current version: V4.1.2
+Current version: V4.1.3
 
 | Version | Supported          |
 | ------- | ------------------ |
