@@ -370,7 +370,7 @@ if user.upper() == 'Y' or user.upper() == 'YES':
 login()
 print(f'Hello {username}!')
 Server = int(np.round(10 ** random.uniform(0, 10)))
-gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps)? ')
+gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative? ')
 if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
     Your_Server = True
     gamemode = 'peaceful'
@@ -422,7 +422,7 @@ while i <= 441:
     game.append(' ')
     i += 1
 i = 0
-if gamemode.upper() == 'PEACEFUL':
+if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE':
     game_size = int(input('How big do u want ur world 2 b??? '))
     y_terrain = int(np.floor(game_size/2))
     game = []
@@ -678,12 +678,21 @@ while i < 999:
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
         elif gamemode == 'rock paper scissors':
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or chat or gamble or play rock paper scissors (prps)? ")
+        elif gamemode == 'creative':
+            move = input(
+                "Do u want 2 move up (w), move left (a) or move right (d) or move down (s) chat or gamble? ")
         else:
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
     last_move = ''
-    if (move.upper() == 'JUMP' or move.upper() == ' ' or move.upper() == 'W') and touching_ground is True:
-        up_speed = 1
-        last_move = 'jump'
+    if (move.upper() == 'JUMP' or move.upper() == ' ' or move.upper() == 'W' or move.upper() == 'UP'):
+        if gamemode == 'creative':
+            if place - game_size >= 0 and not block_types.__contains__(game[place - game_size]):
+                game[place % (game_size ** 2)] = ' '
+                place -= game_size
+                game[place % (game_size ** 2)] = '🙂'
+        elif touching_ground is True:
+            up_speed = 1
+            last_move = 'jump'
     elif (move.upper() == 'LEFT' or move.upper() == 'A') and place % game_size != 0 and not block_types.__contains__(game[place - 1]):
         game[place % (game_size**2)] = ' '
         place -= 1
@@ -692,6 +701,11 @@ while i < 999:
         game[place % (game_size**2)] = ' '
         place += 1
         game[place % (game_size**2)] = '🙂'
+    elif (move.upper() == 'S' or move.upper() == 'DOWN') and gamemode == 'creative':
+        if place + game_size < game_size ** 2 and not block_types.__contains__(game[place + game_size]):
+            game[place % (game_size ** 2)] = ' '
+            place += game_size
+            game[place % (game_size ** 2)] = '🙂'
     elif (move.upper() == 'BAB' or move.upper() == 'BREAK A BLOCK') and gamemode != 'parkour' and gamemode != 'rock paper scissors':
         x = input('x? ')
         y = input('y? ')
@@ -722,17 +736,27 @@ while i < 999:
                 block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs? ')
                 for i in range(len(block_count)):
                     if block.upper() == block_names[i]:
-                        if block_count[i] > 0:
+                        if gamemode == 'creative':
+                            game[place_break] = block_types[i]
+                            if block.upper() == 'CHESTS':
+                                chest_items[place_break] = []
+                                for i in range(len(block_count)):
+                                    chest_items[place_break].append(0)
+                                chest_items[place_break].append(0)  # Saplings
+                        elif block_count[i] > 0:
                             game[place_break] = block_types[i]
                             block_count[i] -= 1
-                if block.upper() == 'SAPLINGS' and Saplings > 0:
-                    spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
-                    Saplings -= 1
-                if block.upper() == 'CHESTS':
-                    chest_items[place_break] = []
-                    for i in range(len(block_count)):
-                        chest_items[place_break].append(0)
-                    chest_items[place_break].append(0)  # Saplings
+                            if block.upper() == 'CHESTS':
+                                chest_items[place_break] = []
+                                for i in range(len(block_count)):
+                                    chest_items[place_break].append(0)
+                                chest_items[place_break].append(0)  # Saplings
+                if block.upper() == 'SAPLINGS':
+                    if gamemode == 'creative':
+                        spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
+                    elif Saplings > 0:
+                        spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
+                        Saplings -= 1
         except ValueError:
             pass
     elif move.upper() == 'CHAT':
@@ -849,7 +873,7 @@ while i < 999:
             else:
                 chat.append(f'Server: {enemy_name} wins!')
     game[place % (game_size**2)] = ' '
-    if up_speed > 0:
+    if up_speed > 0 and gamemode != 'creative':
         i = 0
         while i < up_speed:
             game[place % (game_size**2)] = ' '
@@ -859,7 +883,7 @@ while i < 999:
             else:
                 place += game_size
             i += 1
-    if up_speed < 0:
+    if up_speed < 0 and gamemode != 'creative':
         i = 0
         while i < -1 * up_speed:
             game[place % (game_size**2)] = ' '
