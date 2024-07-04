@@ -5,13 +5,14 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
-Current version: V4.2
+**Current version: V4.2B**
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 4.2     | ✅                 |
-| 4.1.x   | :white_check_mark: |
-| < 4.1   | :x:                |
+| Version | Supported          | Update             | Created                   |
+|---------|--------------------|--------------------|---------------------------|
+| 4.2B    | :white_check_mark: | Creative Gamemode  | 7/4/2024                  |
+| 4.2     | :x:                | Stairs Update      | 7/2/2024                  |
+| 4.1.x   | :white_check_mark: | Village Update     | 6/28/2024 - 7/1/2024      |
+| < 4.1   | :x:                | No specific update | Version range is too long |
 
 ## Reporting a Vulnerability
 
