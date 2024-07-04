@@ -680,7 +680,7 @@ while i < 999:
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or chat or gamble or play rock paper scissors (prps)? ")
         elif gamemode == 'creative':
             move = input(
-                "Do u want 2 move up (w), move left (a) or move right (d) or move down (s) chat or gamble? ")
+                "Do u want 2 move up (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or move down (s) or chat or gamble? ")
         else:
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
     last_move = ''
