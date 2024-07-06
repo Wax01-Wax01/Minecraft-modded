@@ -279,6 +279,7 @@ def entire_game(player_name):
             chest_items[place - game_size - 1].append(0)
         chest_items[place - game_size - 1].append(0)  # Saplings
         chest_items[place - game_size - 1].append(0)  # Flint
+        chest_items[place - game_size - 1].append(0)  # Flint and Steel
         chest_items[place - game_size - 1][1] = random.randint(2, 7)
         chest_items[place - game_size - 1][2] = random.randint(5, 13)
         chest_items[place - game_size - 1][3] = random.randint(1, 4)
@@ -388,7 +389,7 @@ def entire_game(player_name):
     gamemode = gamemode.lower()
     if gamemode == 'rps':
         gamemode = 'rock paper scissors'
-    chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', f"Tip: {random.choice(['You can do a 3 block vertical jump!', "Breaking a village house's chest can give you up to 2 diamonds!", "Craft a chest with 8 planks."])}"]
+    chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', f"Tip: {random.choice(['You can do a 3 block vertical jump!', "Breaking a village house's chest can give you up to 2 diamonds!", "Craft a chest with 8 planks.", 'Explode a TNT with flint and steel!'])}"]
     i = 1
     up_speed = 0
     last_tree = -5
@@ -398,6 +399,7 @@ def entire_game(player_name):
     y_terrain = 10
     Server_Views = 0
     Flint = 0
+    FlintAndSteel = 0
     block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -675,6 +677,7 @@ def entire_game(player_name):
                 summary += f'{Saplings} saplings, '
             if index == 14:
                 summary += f'{Flint} flint, '
+                summary += f'{FlintAndSteel} flint and steel, '
             if index % 7 == 6:
                 summary += '\n'
         print(summary)
@@ -741,6 +744,7 @@ def entire_game(player_name):
                                     block_count[j] += chest_items[place_break][j]
                                 Saplings += chest_items[place_break][len(block_count) + 0]
                                 Flint += chest_items[place_break][len(block_count) + 1]
+                                FlintAndSteel += chest_items[place_break][len(block_count) + 2]
                                 del chest_items[place_break]
                             game[place_break] = ' '
                             break
@@ -763,6 +767,7 @@ def entire_game(player_name):
                                         chest_items[place_break].append(0)
                                     chest_items[place_break].append(0)  # Saplings
                                     chest_items[place_break].append(0)  # Flint
+                                    chest_items[place_break].append(0)  # Flint and Steel
                             elif block_count[i] > 0:
                                 game[place_break] = block_types[i]
                                 block_count[i] -= 1
@@ -772,6 +777,7 @@ def entire_game(player_name):
                                         chest_items[place_break].append(0)
                                     chest_items[place_break].append(0)  # Saplings
                                     chest_items[place_break].append(0)  # Flint
+                                    chest_items[place_break].append(0)  # Flint and Steel
                     if block.upper() == 'SAPLINGS':
                         if gamemode == 'creative':
                             spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
@@ -804,7 +810,7 @@ def entire_game(player_name):
                 Lotteries -= 50
         elif move.upper() == 'CRAFT' and gamemode == 'peaceful':
             print('Crafting Recipes:')
-            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint')
+            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel')
             craft = input('Which recipe you want to craft? (Choose Number) ')
             if craft == '1':
                 craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -828,12 +834,19 @@ def entire_game(player_name):
                             block_count[4] -= 3 * int(craft_count)
                             block_count[9 + int(stair_type)] += 1 * int(craft_count)
             if craft == '4':
-                    craft_count = input(f'How many times do you want to craft recipe {craft}? ')
-                    if craft_count.isdigit():
-                        if block_count[3] >= 2 * int(craft_count) and block_count[6] >= 1 * int(craft_count):
-                            block_count[3] -= 2 * int(craft_count)
-                            block_count[6] -= 1 * int(craft_count)
-                            Flint += 1 * int(craft_count)
+                craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+                if craft_count.isdigit():
+                    if block_count[3] >= 2 * int(craft_count) and block_count[6] >= 1 * int(craft_count):
+                        block_count[3] -= 2 * int(craft_count)
+                        block_count[6] -= 1 * int(craft_count)
+                        Flint += 1 * int(craft_count)
+            if craft == '5':
+                craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+                if craft_count.isdigit():
+                    if Flint >= 1 * int(craft_count) and block_count[7] >= 1 * int(craft_count):
+                        Flint -= 1 * int(craft_count)
+                        block_count[7] -= 1 * int(craft_count)
+                        FlintAndSteel += 1 * int(craft_count)
 
         elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and gamemode == 'peaceful':
             x = input('x? ')
@@ -848,6 +861,7 @@ def entire_game(player_name):
                             chest_summary += '\n'
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -863,6 +877,10 @@ def entire_game(player_name):
                     if item_count <= Flint:
                         Flint -= item_count
                         chest_items[place_break][len(block_count) + 1] += item_count
+                    item_count = int(input(f'How much flint and steel do you want to put in the chest? '))
+                    if item_count <= FlintAndSteel:
+                        FlintAndSteel -= item_count
+                        chest_items[place_break][len(block_count) + 2] += item_count
                     chest_summary = 'Chest contains: '
                     for i in range(len(block_count)):
                         chest_summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
@@ -870,6 +888,7 @@ def entire_game(player_name):
                             chest_summary += '\n'
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
                     summary = 'Inventory: '
                     for index in range(len(block_count)):
                         summary += f'{block_count[index]} {block_names[index].lower()}, '
@@ -879,6 +898,7 @@ def entire_game(player_name):
                             summary += f'{Saplings} saplings, '
                         if index == 14:
                             summary += f'{Flint} flint, '
+                            summary += f'{FlintAndSteel} flint and steel, '
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -892,8 +912,12 @@ def entire_game(player_name):
                         chest_items[place_break][len(block_count) + 0] -= item_count
                     item_count = int(input(f'How much flint do you want take from the chest? '))
                     if item_count <= chest_items[place_break][len(block_count) + 1]:
-                        Flint -= item_count
-                        chest_items[place_break][len(block_count) + 1] += item_count
+                        Flint += item_count
+                        chest_items[place_break][len(block_count) + 1] -= item_count
+                    item_count = int(input(f'How much flint and steel do you want take from the chest? '))
+                    if item_count <= chest_items[place_break][len(block_count) + 2]:
+                        FlintAndSteel += item_count
+                        chest_items[place_break][len(block_count) + 2] -= item_count
             except ValueError:
                 pass
         elif (move.upper() == 'PRPS' or move.upper() == 'PLAY ROCK PAPER SCISSORS') and gamemode == 'rock paper scissors':
@@ -1017,7 +1041,7 @@ def entire_game(player_name):
 
 global_username = entire_game(0)
 while True:
-    if ['YES', 'Y'].__contains__(input('\nDo you want to play again? ').upper()):
+    if ['YES', 'Y'].__contains__(input('\nDo you want to play again? (Y/N) ').upper()):
         global_username = entire_game(global_username)
     else:
         break
