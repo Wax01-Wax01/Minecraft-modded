@@ -1,6 +1,6 @@
 **_COMMIT LEADERBOARD_**
 
-**🥇. Wax01-Wax01 - 2️⃣7️⃣ commits**
+**🥇. Wax01-Wax01 - 3️⃣9️⃣ commits**
 
 **🥈. liyongwang2018 - 5️⃣ commits**
 
@@ -20,13 +20,13 @@
 
 **🔟.**
 
-**TOTAL: 1️⃣4️⃣ commits**
+**TOTAL: 4️⃣4️⃣ commits**
 
 **_Cool Commit Gap Display:_**
 
                                     ____________________________
 
-**2️⃣7️⃣ commits - 🥇 Wax01-Wax01 |--[GAP: 2️⃣2️⃣ COMMITS]--| liyongwang2018 🥈 - 5️⃣ commits**
+**3️⃣9️⃣ commits - 🥇 Wax01-Wax01 |--[GAP: 3️⃣4️⃣ COMMITS]--| liyongwang2018 🥈 - 5️⃣ commits**
  
                                     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -39,3 +39,5 @@ _**CHAT 🗨️**_
 **Wax01-Wax01: Ima palindrome ahead of liyongwang2018**
 
 **Wax01-Wax01: 13 ahead, NOICE!!!**
+
+**Wax01-Wax01: I'm at 39 commits**
