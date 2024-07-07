@@ -38,6 +38,13 @@ def entire_game(player_name):
         '∥', '∥', '∥', '∥', '∥', '∥', '∥',
     ]
 
+    tnt_explosion_range = {-1: 3,
+                           -2: 5,
+                           -2: 5,
+                           -2: 5,
+                           -1: 3
+                           }
+
 
     def clear_range(start, end):  # Clears a range of blocks in the game
         game_index = start
@@ -338,6 +345,13 @@ def entire_game(player_name):
                         break
                     block_place += game_size
 
+
+    def explode_tnt(x_tnt, y_tnt):
+        explode_place = (game_size**2-int(np.ceil(game_size/2))) + x_tnt - y_tnt * game_size
+        for start, length, increment_tnt in tnt_explosion_range.items(), range(5):
+            for increment_tnt_len in range(length):
+                if game_size ** 2 > explode_place + (i - 2) * game_size + start + increment_tnt_len >= 0:
+                    game[explode_place + (i - 2) * game_size + start + increment_tnt_len] = ' '
 
     def ban_user():  # Banning system
         hit_user = input('who do u want to ban ')
