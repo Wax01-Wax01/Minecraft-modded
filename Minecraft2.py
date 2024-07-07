@@ -38,13 +38,6 @@ def entire_game(player_name):
         '∥', '∥', '∥', '∥', '∥', '∥', '∥',
     ]
 
-    tnt_explosion_range = {-1: 3,
-                           -2: 5,
-                           -2: 5,
-                           -2: 5,
-                           -1: 3
-                           }
-
 
     def clear_range(start, end):  # Clears a range of blocks in the game
         game_index = start
@@ -346,13 +339,6 @@ def entire_game(player_name):
                     block_place += game_size
 
 
-    def explode_tnt(x_tnt, y_tnt):
-        explode_place = (game_size**2-int(np.ceil(game_size/2))) + x_tnt - y_tnt * game_size
-        for start, length, increment_tnt in tnt_explosion_range.items(), range(5):
-            for increment_tnt_len in range(length):
-                if game_size ** 2 > explode_place + (i - 2) * game_size + start + increment_tnt_len >= 0:
-                    game[explode_place + (i - 2) * game_size + start + increment_tnt_len] = ' '
-
     def ban_user():  # Banning system
         hit_user = input('who do u want to ban ')
         while True:
@@ -403,7 +389,7 @@ def entire_game(player_name):
     gamemode = gamemode.lower()
     if gamemode == 'rps':
         gamemode = 'rock paper scissors'
-    chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', f"Tip: {random.choice(['You can do a 3 block vertical jump!', "Breaking a village house's chest can give you up to 2 diamonds!", "Craft a chest with 8 planks.", 'Explode a TNT with flint and steel!'])}"]
+    chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', f"Tip: {random.choice(['You can do a 3 block vertical jump!', "Breaking a village house's chest can give you up to 2 diamonds!", "Craft a chest with 8 planks.", 'Explode a TNT with flint and steel!', "You won't get the items in a chest if you explode them with TNT."])}"]
     i = 1
     up_speed = 0
     last_tree = -5
@@ -422,7 +408,9 @@ def entire_game(player_name):
     G1 = 0
     G2 = 0
     chest_items = {}
+
     if gamemode.upper() == 'SKYWARS' or gamemode.upper() == 'BEDWARS':
+        game_size = 21
         block_count[0:2] = 1000000, 1000000
         user_domain = random.randint(1, 7)  # Enemy name generator
         if user_domain == 1:
@@ -667,6 +655,22 @@ def entire_game(player_name):
             '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆', '◆'
     x_pos = (place % (game_size**2)) % game_size - int(np.floor(game_size/2))  # Coordinate converter
     y_pos = -1 * ((place % (game_size**2)) // game_size) + int(np.floor(game_size/2))
+
+    tnt_explosion_range = [-2 * game_size - 1, -2 * game_size, -2 * game_size + 1,
+                           -game_size - 2, -game_size - 1, -game_size, -game_size + 1, -game_size + 2,
+                           -2, -1, 0, 1, 2,
+                           game_size - 2, game_size - 1, game_size, game_size + 1, game_size + 2,
+                           2 * game_size - 1, 2 * game_size, 2 * game_size + 1]
+
+    def explode_tnt(tnt_x, tnt_y):  # Explodes TNT
+        explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
+        for explode_index in tnt_explosion_range:
+            if game_size ** 2 > explode_origin + explode_index >= 0:
+                if game[explode_origin + explode_index] != '🙂':
+                    for block_test in range(len(block_types)):
+                        if game[explode_origin + explode_index] == block_types[block_test]:
+                            block_count[block_test] += 1
+                    game[explode_origin + explode_index] = ' '
     # Main Loop
     while i < 999:
         if not block_types.__contains__(game[(place + game_size) % (game_size**2)]) and not place + 2*game_size > game_size**2-1:  # Detects if touching the ground
@@ -1049,6 +1053,7 @@ def entire_game(player_name):
             game[place] = ' '
             place = 2504
             game[place] = '🙂'
+        explode_tnt(random.randint(-10, 10), random.randint(0, 20))
     print('Process finished with exit code 69421')  # Fake ending message
     return username
 
