@@ -684,7 +684,7 @@ def entire_game(player_name):
             if not block_types.__contains__([place - game_size]) and last_move == '':
                 up_speed = 0
 
-        for message in chat:  # Generates Inventory summary message and coorinates
+        for message in chat:  # Generates Inventory summary message and coordinates
             print(message)
         k = 0
         while k < game_size:
