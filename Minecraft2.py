@@ -379,7 +379,7 @@ def entire_game(player_name):
     login()
     print(f'Hello {username}!')
     Server = int(np.round(10 ** random.uniform(0, 10)))
-    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative? ')  # Gamemode to play
+    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative or explosion survival? ')  # Gamemode to play
     if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
         Your_Server = True
         gamemode = 'peaceful'
@@ -435,8 +435,11 @@ def entire_game(player_name):
         game.append(' ')
         i += 1
     i = 0
-    if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE':
-        game_size = int(input('How big do u want ur world 2 b??? '))
+    if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE' or gamemode.upper() == 'EXPLOSION SURVIVAL':
+        if gamemode.upper() == 'EXPLOSION SURVIVAL':
+            game_size = 41
+        else:
+            game_size = int(input('How big do u want ur world 2 b??? '))
         y_terrain = int(np.floor(game_size/2))
         game = []  # World Terrain Generator
         while i <= game_size**2:
@@ -656,6 +659,7 @@ def entire_game(player_name):
     x_pos = (place % (game_size**2)) % game_size - int(np.floor(game_size/2))  # Coordinate converter
     y_pos = -1 * ((place % (game_size**2)) // game_size) + int(np.floor(game_size/2))
 
+    # Where to explode TNT
     tnt_explosion_range = [-2 * game_size - 1, -2 * game_size, -2 * game_size + 1,
                            -game_size - 2, -game_size - 1, -game_size, -game_size + 1, -game_size + 2,
                            -2, -1, 0, 1, 2,
@@ -719,6 +723,9 @@ def entire_game(player_name):
             elif gamemode == 'creative':
                 move = input(
                     "Do u want 2 move up (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or move down (s) or chat or gamble? ")
+            elif gamemode == 'explosion survival':
+                move = input(
+                    "Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or chat or gamble? ")
             else:
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
 
@@ -768,7 +775,7 @@ def entire_game(player_name):
                             break
             except ValueError:
                 pass
-        elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors':
+        elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors' and gamemode != 'explosion survival':
             x = input('x? ')
             y = input('y? ')
             try:
@@ -1002,6 +1009,9 @@ def entire_game(player_name):
             game[place] = ' '
             place = 401
             game[place] = '🙂'
+        if gamemode == 'explosion survival' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):
+            print(f'You died! You fell into the void! You survived {Time_Spent} seconds!')
+            break
         if game.__contains__('☹️') is False and gamemode == 'skywars':
             print('YOU WIN!!!')
             break
@@ -1053,7 +1063,9 @@ def entire_game(player_name):
             game[place] = ' '
             place = 2504
             game[place] = '🙂'
-        explode_tnt(random.randint(-10, 10), random.randint(0, 20))
+        if gamemode.upper() == 'EXPLOSION SURVIVAL':
+            explode_tnt(random.randint(-20, 20), random.randint(0, 40))
+
     print('Process finished with exit code 69421')  # Fake ending message
     return username
 
