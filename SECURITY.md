@@ -5,7 +5,7 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
-**Current version: V4.2B.3 / V5.0-alpha.2**
+**Current version: V4.2B.4 / V5.0-beta.0**
 
 | Version | Supported          | Update             | Created                   |
 |---------|--------------------|--------------------|---------------------------|
