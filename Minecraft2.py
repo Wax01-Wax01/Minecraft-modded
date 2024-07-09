@@ -402,7 +402,7 @@ def entire_game(player_name):
     FlintAndSteel = 0
     block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT']
-    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100]
     Enemy_Bed = None
     Your_Bed = None
     G1 = 0
@@ -715,7 +715,7 @@ def entire_game(player_name):
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or buy something (bs)? ")
         else:
             if gamemode == 'peaceful':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac)? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac) or \nexplode a tnt (eat)? ")
             elif gamemode == 'parkour':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
             elif gamemode == 'rock paper scissors':
@@ -781,7 +781,7 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
-                    block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs? ')
+                    block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt? ')
                     for i in range(len(block_count)):
                         if block.upper() == block_names[i]:
                             if gamemode == 'creative':
@@ -965,6 +965,16 @@ def entire_game(player_name):
                     chat.append(f'Server: {username} wins!')
                 else:
                     chat.append(f'Server: {enemy_name} wins!')
+        elif (move.upper() == 'EAT' or move.upper() == 'EXPLODE A TNT') and FlintAndSteel >= 1 and gamemode == 'peaceful':
+            x = input('x? ')
+            y = input('y? ')
+            try:
+                place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(np.floor(game_size / 2))
+                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '⚠':
+                    explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 2))
+                    block_count[14] -= 1
+            except ValueError:
+                pass
         elif move.upper() == 'QUIT':
             break
 
@@ -1066,7 +1076,7 @@ def entire_game(player_name):
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             explode_tnt(random.randint(-20, 20), random.randint(0, 40))
 
-    print('Process finished with exit code 69421')  # Fake ending message
+    print('Process finished with exit code 69420')  # Fake ending message
     return username
 
 
