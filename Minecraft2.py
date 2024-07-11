@@ -675,6 +675,10 @@ def entire_game(player_name):
                         if game[explode_origin + explode_index] == block_types[block_test]:
                             block_count[block_test] += 1
                     game[explode_origin + explode_index] = ' '
+
+
+    hp = 20
+
     # Main Loop
     while i < 999:
         if not block_types.__contains__(game[(place + game_size) % (game_size**2)]) and not place + 2*game_size > game_size**2-1:  # Detects if touching the ground
@@ -683,6 +687,8 @@ def entire_game(player_name):
             touching_ground = True
             if not block_types.__contains__([place - game_size]) and last_move == '':
                 up_speed = 0
+        if gamemode == 'explosion survival' and hp < 20:  # Regeneration of health
+            hp += 1
 
         for message in chat:  # Generates Inventory summary message and coordinates
             print(message)
@@ -702,6 +708,8 @@ def entire_game(player_name):
                 summary += f'{FlintAndSteel} flint and steel, '
             if index % 7 == 6:
                 summary += '\n'
+        if gamemode == 'explosion survival':
+            print('❤️' * int(np.ceil(hp / 2)))
         print(summary)
         print(str(x_pos) + ", " + str(y_pos))
 
@@ -998,6 +1006,8 @@ def entire_game(player_name):
                     game[place] = '🙂'
                 else:
                     place -= game_size
+                    if gamemode == 'explosion survival':
+                        hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
                 i += 1
         game[place % (game_size**2)] = '🙂'
         if touching_ground is False:
@@ -1075,6 +1085,11 @@ def entire_game(player_name):
             game[place] = '🙂'
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             explode_tnt(random.randint(-20, 20), random.randint(0, 40))
+        if gamemode == 'explosion survival' and hp <= 0:
+            print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')
+            break
+
+        hp = int(hp)
 
     print('Process finished with exit code 69420')  # Fake ending message
     return username
