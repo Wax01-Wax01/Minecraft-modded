@@ -379,7 +379,7 @@ def entire_game(player_name):
     login()
     print(f'Hello {username}!')
     Server = int(np.round(10 ** random.uniform(0, 10)))
-    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative or explosion survival? ')  # Gamemode to play
+    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative or explosion survival or \nsurvival? ')  # Gamemode to play
     if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
         Your_Server = True
         gamemode = 'peaceful'
@@ -435,7 +435,7 @@ def entire_game(player_name):
         game.append(' ')
         i += 1
     i = 0
-    if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE' or gamemode.upper() == 'EXPLOSION SURVIVAL':
+    if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE' or gamemode.upper() == 'EXPLOSION SURVIVAL' or gamemode.upper() == 'SURVIVAL':
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             game_size = 41
         else:
@@ -687,7 +687,7 @@ def entire_game(player_name):
             touching_ground = True
             if not block_types.__contains__([place - game_size]) and last_move == '':
                 up_speed = 0
-        if gamemode == 'explosion survival' and hp < 20:  # Regeneration of health
+        if (gamemode == 'explosion survival' or gamemode == 'survival') and hp < 20:  # Regeneration of health
             hp += 1
 
         for message in chat:  # Generates Inventory summary message and coordinates
@@ -708,7 +708,7 @@ def entire_game(player_name):
                 summary += f'{FlintAndSteel} flint and steel, '
             if index % 7 == 6:
                 summary += '\n'
-        if gamemode == 'explosion survival':
+        if gamemode == 'explosion survival' or gamemode == 'survival':
             print('❤️' * int(np.ceil(hp / 2)))
         print(summary)
         print(str(x_pos) + ", " + str(y_pos))
@@ -1006,9 +1006,12 @@ def entire_game(player_name):
                     game[place] = '🙂'
                 else:
                     place -= game_size
-                    if gamemode == 'explosion survival':
+                    if gamemode == 'explosion survival' or gamemode == 'survival':
                         hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
                 i += 1
+            if (gamemode == 'explosion survival' or gamemode == 'survival') and place + game_size < game_size ** 2:
+                if block_types.__contains__(game[place + game_size]):
+                    hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
         game[place % (game_size**2)] = '🙂'
         if touching_ground is False:
             up_speed -= 1
@@ -1085,7 +1088,7 @@ def entire_game(player_name):
             game[place] = '🙂'
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             explode_tnt(random.randint(-20, 20), random.randint(0, 40))
-        if gamemode == 'explosion survival' and hp <= 0:
+        if (gamemode == 'explosion survival' or gamemode == 'survival') and hp <= 0:
             print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')
             break
 
