@@ -722,7 +722,7 @@ def entire_game(player_name):
         if gamemode == 'bedwars' and -9 <= x_pos <= -6 and (-9 <= y_pos <= -6 or 5 <= y_pos <= 8):  # Asks for what to do.
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or buy something (bs)? ")
         else:
-            if gamemode == 'peaceful':
+            if gamemode == 'peaceful' or gamemode == 'survival':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac) or \nexplode a tnt (eat)? ")
             elif gamemode == 'parkour':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
@@ -841,7 +841,7 @@ def entire_game(player_name):
                 block_count[1] += 10
                 block_count[2] += 2
                 Lotteries -= 50
-        elif move.upper() == 'CRAFT' and gamemode == 'peaceful':
+        elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival'):
             print('Crafting Recipes:')
             print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel')
             craft = input('Which recipe you want to craft? (Choose Number) ')
@@ -881,7 +881,7 @@ def entire_game(player_name):
                         block_count[7] -= 1 * int(craft_count)
                         FlintAndSteel += 1 * int(craft_count)
 
-        elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and gamemode == 'peaceful':
+        elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival'):
             x = input('x? ')
             y = input('y? ')
             try:
@@ -973,7 +973,7 @@ def entire_game(player_name):
                     chat.append(f'Server: {username} wins!')
                 else:
                     chat.append(f'Server: {enemy_name} wins!')
-        elif (move.upper() == 'EAT' or move.upper() == 'EXPLODE A TNT') and FlintAndSteel >= 1 and gamemode == 'peaceful':
+        elif (move.upper() == 'EAT' or move.upper() == 'EXPLODE A TNT') and FlintAndSteel >= 1 and (gamemode == 'peaceful' or gamemode == 'survival'):
             x = input('x? ')
             y = input('y? ')
             try:
