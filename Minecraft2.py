@@ -280,6 +280,7 @@ def entire_game(player_name):
         chest_items[place - game_size - 1].append(0)  # Saplings
         chest_items[place - game_size - 1].append(0)  # Flint
         chest_items[place - game_size - 1].append(0)  # Flint and Steel
+        chest_items[place - game_size - 1].append(0)  # Explosive Pickaxes
         chest_items[place - game_size - 1][1] = random.randint(2, 7)
         chest_items[place - game_size - 1][2] = random.randint(5, 13)
         chest_items[place - game_size - 1][3] = random.randint(1, 4)
@@ -400,6 +401,7 @@ def entire_game(player_name):
     Server_Views = 0
     Flint = 0
     FlintAndSteel = 0
+    ExplosivePickaxes = 0
     block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100]
@@ -706,6 +708,7 @@ def entire_game(player_name):
             if index == 14:
                 summary += f'{Flint} flint, '
                 summary += f'{FlintAndSteel} flint and steel, '
+                summary += f'{ExplosivePickaxes} explosive pickaxes, '
             if index % 7 == 6:
                 summary += '\n'
         if gamemode == 'explosion survival' or gamemode == 'survival':
@@ -778,6 +781,7 @@ def entire_game(player_name):
                                 Saplings += chest_items[place_break][len(block_count) + 0]
                                 Flint += chest_items[place_break][len(block_count) + 1]
                                 FlintAndSteel += chest_items[place_break][len(block_count) + 2]
+                                ExplosivePickaxes += chest_items[place_break][len(block_count) + 3]
                                 del chest_items[place_break]
                             game[place_break] = ' '
                             break
@@ -801,6 +805,7 @@ def entire_game(player_name):
                                     chest_items[place_break].append(0)  # Saplings
                                     chest_items[place_break].append(0)  # Flint
                                     chest_items[place_break].append(0)  # Flint and Steel
+                                    chest_items[place_break].append(0)  # Explosive Pickaxes
                             elif block_count[i] > 0:
                                 game[place_break] = block_types[i]
                                 block_count[i] -= 1
@@ -811,6 +816,7 @@ def entire_game(player_name):
                                     chest_items[place_break].append(0)  # Saplings
                                     chest_items[place_break].append(0)  # Flint
                                     chest_items[place_break].append(0)  # Flint and Steel
+                                    chest_items[place_break].append(0)  # Explosive Pickaxes
                     if block.upper() == 'SAPLINGS':
                         if gamemode == 'creative':
                             spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
@@ -895,6 +901,7 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes'
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -914,6 +921,10 @@ def entire_game(player_name):
                     if item_count <= FlintAndSteel:
                         FlintAndSteel -= item_count
                         chest_items[place_break][len(block_count) + 2] += item_count
+                    item_count = int(input(f'How many explosive pickaxes do you want to put in the chest? '))
+                    if item_count <= ExplosivePickaxes:
+                        ExplosivePickaxes -= item_count
+                        chest_items[place_break][len(block_count) + 3] += item_count
                     chest_summary = 'Chest contains: '
                     for i in range(len(block_count)):
                         chest_summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
@@ -922,6 +933,7 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes'
                     summary = 'Inventory: '
                     for index in range(len(block_count)):
                         summary += f'{block_count[index]} {block_names[index].lower()}, '
@@ -932,6 +944,7 @@ def entire_game(player_name):
                         if index == 14:
                             summary += f'{Flint} flint, '
                             summary += f'{FlintAndSteel} flint and steel, '
+                            summary += f'{ExplosivePickaxes} explosive pickaxes, '
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -951,6 +964,10 @@ def entire_game(player_name):
                     if item_count <= chest_items[place_break][len(block_count) + 2]:
                         FlintAndSteel += item_count
                         chest_items[place_break][len(block_count) + 2] -= item_count
+                    item_count = int(input(f'How many explosive pickaxes do you want take from the chest? '))
+                    if item_count <= chest_items[place_break][len(block_count) + 3]:
+                        ExplosivePickaxes += item_count
+                        chest_items[place_break][len(block_count) + 3] -= item_count
             except ValueError:
                 pass
         elif (move.upper() == 'PRPS' or move.upper() == 'PLAY ROCK PAPER SCISSORS') and gamemode == 'rock paper scissors':
