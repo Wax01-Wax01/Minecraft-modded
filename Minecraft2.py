@@ -410,6 +410,7 @@ def entire_game(player_name):
     G1 = 0
     G2 = 0
     chest_items = {}
+    ExplosivePickEquip = False
 
     if gamemode.upper() == 'SKYWARS' or gamemode.upper() == 'BEDWARS':
         game_size = 21
@@ -668,9 +669,12 @@ def entire_game(player_name):
                            game_size - 2, game_size - 1, game_size, game_size + 1, game_size + 2,
                            2 * game_size - 1, 2 * game_size, 2 * game_size + 1]
 
-    def explode_tnt(tnt_x, tnt_y):  # Explodes TNT
+    # Explosive pickaxe explosion range:
+    explosive_pick_range = [-game_size, -1, 0, 1, game_size]
+
+    def explode_tnt(tnt_x, tnt_y, explosion_range):  # Explodes TNT
         explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
-        for explode_index in tnt_explosion_range:
+        for explode_index in explosion_range:
             if game_size ** 2 > explode_origin + explode_index >= 0:
                 if game[explode_origin + explode_index] != '🙂':
                     for block_test in range(len(block_types)):
@@ -726,7 +730,7 @@ def entire_game(player_name):
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or buy something (bs)? ")
         else:
             if gamemode == 'peaceful' or gamemode == 'survival':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac) or \nexplode a tnt (eat)? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac) or \nexplode a tnt (eat) or equip/unequip explosive pickaxe (eep)? ")
             elif gamemode == 'parkour':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
             elif gamemode == 'rock paper scissors':
@@ -769,22 +773,25 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and (block_types.__contains__(game[place_break])):
-                    for i in range(len(block_count)):
-                        if block_types[i] == game[place_break]:
-                            block_count[i] += 1
-                            if game[place_break] == '0' and random.randint(1, 6) == 1:
-                                block_count[2] -= 1
-                                Saplings += 1
-                            if game[place_break] == '⊠':
-                                for j in range(len(block_count)):
-                                    block_count[j] += chest_items[place_break][j]
-                                Saplings += chest_items[place_break][len(block_count) + 0]
-                                Flint += chest_items[place_break][len(block_count) + 1]
-                                FlintAndSteel += chest_items[place_break][len(block_count) + 2]
-                                ExplosivePickaxes += chest_items[place_break][len(block_count) + 3]
-                                del chest_items[place_break]
-                            game[place_break] = ' '
-                            break
+                    if ExplosivePickEquip:
+                        explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), explosive_pick_range)
+                    else:
+                        for i in range(len(block_count)):
+                            if block_types[i] == game[place_break]:
+                                block_count[i] += 1
+                                if game[place_break] == '0' and random.randint(1, 6) == 1:
+                                    block_count[2] -= 1
+                                    Saplings += 1
+                                if game[place_break] == '⊠':
+                                    for j in range(len(block_count)):
+                                        block_count[j] += chest_items[place_break][j]
+                                    Saplings += chest_items[place_break][len(block_count) + 0]
+                                    Flint += chest_items[place_break][len(block_count) + 1]
+                                    FlintAndSteel += chest_items[place_break][len(block_count) + 2]
+                                    ExplosivePickaxes += chest_items[place_break][len(block_count) + 3]
+                                    del chest_items[place_break]
+                                game[place_break] = ' '
+                                break
             except ValueError:
                 pass
         elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors' and gamemode != 'explosion survival':
@@ -849,7 +856,7 @@ def entire_game(player_name):
                 Lotteries -= 50
         elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival'):
             print('Crafting Recipes:')
-            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel')
+            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe')
             craft = input('Which recipe you want to craft? (Choose Number) ')
             if craft == '1':
                 craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -886,6 +893,13 @@ def entire_game(player_name):
                         Flint -= 1 * int(craft_count)
                         block_count[7] -= 1 * int(craft_count)
                         FlintAndSteel += 1 * int(craft_count)
+            if craft == '6':
+                craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+                if craft_count.isdigit():
+                    if block_count[4] >= 2 * int(craft_count) and block_count[14] >= 3 * int(craft_count):
+                        block_count[4] -= 2 * int(craft_count)
+                        block_count[14] -= 3 * int(craft_count)
+                        ExplosivePickaxes += 1 * int(craft_count)
 
         elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival'):
             x = input('x? ')
@@ -996,12 +1010,22 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(np.floor(game_size / 2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '⚠':
-                    explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 2))
+                    explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range)
                     block_count[14] -= 1
             except ValueError:
                 pass
         elif move.upper() == 'QUIT':
             break
+        elif ['EEP', 'EQUIP EXPLOSIVE PICKAXE', 'UNEQUIP EXPLOSIVE PICKAXE', 'EQUIP/UNEQUIP EXPLOSIVE PICKAXE'].__contains__(move.upper()):
+            if ExplosivePickaxes <= 0:
+                print('No Explosive Pickaxe found. Craft one with 2 Planks and 3 TNT.')
+            else:
+                if ExplosivePickEquip:
+                    ExplosivePickEquip = False
+                    print('Successfully Unequiped Explosive Pickaxe')
+                else:
+                    ExplosivePickEquip = True
+                    print('Successfully Equipped Explosive Pickaxe')
 
         game[place % (game_size**2)] = ' '  # Adds Gravity
         if up_speed > 0 and gamemode != 'creative':
@@ -1104,7 +1128,7 @@ def entire_game(player_name):
             place = 2504
             game[place] = '🙂'
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
-            explode_tnt(random.randint(-20, 20), random.randint(0, 40))
+            explode_tnt(random.randint(-20, 20), random.randint(0, 40), tnt_explosion_range)
         if (gamemode == 'explosion survival' or gamemode == 'survival') and hp <= 0:
             print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')
             break
