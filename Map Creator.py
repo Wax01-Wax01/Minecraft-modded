@@ -113,4 +113,39 @@ vill_house = [
     ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'], ['∥'],  # -03 - game_size * 0 ~ +03 - game_size * 0
 ]
 
+# Evil Tower Gamemode:
+# Types: '▪', '⚠'
+game = []
+for i in range(441):
+    game += [' ']
+place = 409
+game[409] = '🙂'
+# Lvl 1 -> Easy
+# Poss. #1:
+game[408] = '▪'
+game[365] = '▪'
+game[343] = '▪'
+game[324] = '▪'
+game[305] = '▪'
+game[285] = '▪'
+game[264] = '▪'
+game[221] = '▪'
+game[199] = '▪'
+game[177] = '▪'
+game[174] = '▪'
+game[131] = '▪'
+game[130] = '▪'
+game[129] = '⚠'
+game[128] = '▪'
+game[106] = '▪'
+game[85] = '▪'
+game[45] = '▪'
+game[47] = '▪'
+game[50] = '▪'
+game[30] = '▪'
 
+
+k = 0
+while k < 21:
+    print(game[k * 21: (k + 1) * 21])
+    k += 1
