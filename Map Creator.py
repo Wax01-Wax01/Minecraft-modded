@@ -116,10 +116,42 @@ vill_house = [
 # Evil Tower Gamemode:
 # Types: '▪', '⚠'
 map_easy_1 = []
+map_easy_2 = []
+map_easy_3 = []
+map_medium_1 = []
+map_medium_2 = []
+map_medium_3 = []
+map_hard_1 = []
+map_hard_2 = []
+map_hard_3 = []
 for i in range(441):
     map_easy_1 += [' ']
+for i in range(441):
+    map_easy_2 += [' ']
+for i in range(441):
+    map_easy_3 += [' ']
+for i in range(441):
+    map_medium_1 += [' ']
+for i in range(441):
+    map_medium_2 += [' ']
+for i in range(441):
+    map_medium_3 += [' ']
+for i in range(441):
+    map_hard_1 += [' ']
+for i in range(441):
+    map_hard_2 += [' ']
+for i in range(441):
+    map_hard_3 += [' ']
 place = 409
 map_easy_1[409] = '🙂'
+map_easy_2[409] = '🙂'
+map_easy_3[409] = '🙂'
+map_medium_1[409] = '🙂'
+map_medium_2[409] = '🙂'
+map_medium_3[409] = '🙂'
+map_hard_1[409] = '🙂'
+map_hard_2[409] = '🙂'
+map_hard_3[409] = '🙂'
 # Lvl 1 -> Easy
 # Poss. #1:
 map_easy_1[408] = '▪'
@@ -143,9 +175,38 @@ map_easy_1[45] = '▪'
 map_easy_1[47] = '▪'
 map_easy_1[50] = '▪'
 map_easy_1[30] = '▪'
+# Poss. #2:
+map_easy_2[408] = '▪'
+map_easy_2[367] = '▪'
+map_easy_2[348] = '▪'
+map_easy_2[349] = '▪'
+map_easy_2[350] = '⚠'
+map_easy_2[351] = '▪'
+map_easy_2[352] = '⚠'
+map_easy_2[353] = '▪'
+map_easy_2[354] = '⚠'
+map_easy_2[334] = '▪'
+map_easy_2[314] = '▪'
+map_easy_2[270] = '▪'
+map_easy_2[266] = '▪'
+map_easy_2[264] = '⚠'
+map_easy_2[262] = '▪'
+map_easy_2[239] = '▪'
+map_easy_2[218] = '▪'
+map_easy_2[197] = '▪'
+map_easy_2[260] = '▪'
+map_easy_2[303] = '▪'
+map_easy_2[302] = '▪'
+map_easy_2[300] = '▪'
+map_easy_2[257] = '▪'
+map_easy_2[216] = '▪'
+map_easy_2[157] = '▪'
+map_easy_2[117] = '▪'
+map_easy_2[73] = '▪'
+map_easy_2[33] = '▪'
 
 
 k = 0
 while k < 21:
-    print(map_easy_1[k * 21: (k + 1) * 21])
+    print(map_easy_2[k * 21: (k + 1) * 21])
     k += 1
