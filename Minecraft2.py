@@ -402,9 +402,9 @@ def entire_game(player_name):
     Flint = 0
     FlintAndSteel = 0
     ExplosivePickaxes = 0
-    block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠']
-    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT']
-    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100]
+    block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?']
+    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS']
+    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0]
     Enemy_Bed = None
     Your_Bed = None
     G1 = 0
@@ -776,6 +776,7 @@ def entire_game(player_name):
                     if ExplosivePickEquip:
                         explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), explosive_pick_range)
                     else:
+                        lucky_block = False
                         for i in range(len(block_count)):
                             if block_types[i] == game[place_break]:
                                 block_count[i] += 1
@@ -790,8 +791,13 @@ def entire_game(player_name):
                                     FlintAndSteel += chest_items[place_break][len(block_count) + 2]
                                     ExplosivePickaxes += chest_items[place_break][len(block_count) + 3]
                                     del chest_items[place_break]
+                                if game[place_break] == '?':
+                                    lucky_block = True
                                 game[place_break] = ' '
                                 break
+                        if lucky_block:
+                            block_count[15] -= 1
+                            game[place_break] = random.choice(block_types)
             except ValueError:
                 pass
         elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors' and gamemode != 'explosion survival':
@@ -800,7 +806,7 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
-                    block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt? ')
+                    block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks? ')
                     for i in range(len(block_count)):
                         if block.upper() == block_names[i]:
                             if gamemode == 'creative':
@@ -856,7 +862,7 @@ def entire_game(player_name):
                 Lotteries -= 50
         elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival'):
             print('Crafting Recipes:')
-            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe')
+            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe \n7. 4 stone and 1 tnt -> 1 lucky block')
             craft = input('Which recipe you want to craft? (Choose Number) ')
             if craft == '1':
                 craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -900,6 +906,13 @@ def entire_game(player_name):
                         block_count[4] -= 2 * int(craft_count)
                         block_count[14] -= 3 * int(craft_count)
                         ExplosivePickaxes += 1 * int(craft_count)
+            if craft == '7':
+                craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+                if craft_count.isdigit():
+                    if block_count[14] >= 1 * int(craft_count) and block_count[3] >= 4 * int(craft_count):
+                        block_count[14] -= 1 * int(craft_count)
+                        block_count[3] -= 4 * int(craft_count)
+                        block_count[15] += 1 * int(craft_count)
 
         elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival'):
             x = input('x? ')
