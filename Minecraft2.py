@@ -355,7 +355,7 @@ def entire_game(player_name):
 
     last_move = ''
     if player_name == 0:
-        user_domain = random.randint(1, 7)  # Username generator
+        user_domain = random.randint(1, 20)  # Username generator
         if user_domain == 1:
             user_domain = "01'er"
         if user_domain == 2:
@@ -370,6 +370,32 @@ def entire_game(player_name):
             user_domain = "L0L_C4P-S"
         if user_domain == 7:
             user_domain = "Anti09'er"
+        if user_domain == 8:
+            user_domain = "Xx_0H10-1T3_"
+        if user_domain == 9:
+            user_domain = "Wax01-Wax01_DA-"
+        if user_domain == 10:
+            user_domain = "Xx_XxxX_M-PIRE-"
+        if user_domain == 11:
+            user_domain = "abcdefghijklmnopqrstuvwxyz"
+        if user_domain == 12:
+            user_domain = "r_CUT_bee"
+        if user_domain == 13:
+            user_domain = "Anti5112967'er"
+        if user_domain == 14:
+            user_domain = "github-user"
+        if user_domain == 15:
+            user_domain = "0N3_PLU5_TW0_3QU4L5_"
+        if user_domain == 16:
+            user_domain = "min3craft_PLAYR"
+        if user_domain == 17:
+            user_domain = "gmrgmr"
+        if user_domain == 18:
+            user_domain = "wAX01_iN_c4P5_r3V3RS3"
+        if user_domain == 19:
+            user_domain = "Wax01_fr0m_"
+        if user_domain == 20:
+            user_domain = "XxXxWax01xXxX"
         user_id = random.randint(1000, 9999)
         username = user_domain + str(user_id)
     else:
@@ -415,7 +441,7 @@ def entire_game(player_name):
     if gamemode.upper() == 'SKYWARS' or gamemode.upper() == 'BEDWARS':
         game_size = 21
         block_count[0:2] = 1000000, 1000000
-        user_domain = random.randint(1, 7)  # Enemy name generator
+        user_domain = random.randint(1, 20)  # Enemy name generator
         if user_domain == 1:
             user_domain = "01'er"
         if user_domain == 2:
@@ -430,6 +456,32 @@ def entire_game(player_name):
             user_domain = "L0L_C4P-S"
         if user_domain == 7:
             user_domain = "Anti09'er"
+        if user_domain == 8:
+            user_domain = "Xx_0H10-1T3_"
+        if user_domain == 9:
+            user_domain = "Wax01-Wax01_DA-"
+        if user_domain == 10:
+            user_domain = "Xx_XxxX_M-PIRE-"
+        if user_domain == 11:
+            user_domain = "abcdefghijklmnopqrstuvwxyz"
+        if user_domain == 12:
+            user_domain = "r_CUT_bee"
+        if user_domain == 13:
+            user_domain = "Anti5112967'er"
+        if user_domain == 14:
+            user_domain = "github-user"
+        if user_domain == 15:
+            user_domain = "0N3_PLU5_TW0_3QU4L5_"
+        if user_domain == 16:
+            user_domain = "min3craft_PLAYR"
+        if user_domain == 17:
+            user_domain = "gmrgmr"
+        if user_domain == 18:
+            user_domain = "wAX01_iN_c4P5_r3V3RS3"
+        if user_domain == 19:
+            user_domain = "Wax01_fr0m_"
+        if user_domain == 20:
+            user_domain = "XxXxWax01xXxX"
         user_id = random.randint(1000, 9999)
         enemy_name = user_domain + str(user_id)
         chat.append(f'{enemy_name}: I will win!!!')
@@ -592,7 +644,7 @@ def entire_game(player_name):
         G1 = 0
         G2 = 0
     if gamemode.upper() == 'RPS' or gamemode.upper() == 'ROCK PAPER SCISSORS':
-        user_domain = random.randint(1, 7)
+        user_domain = random.randint(1, 20)
         if user_domain == 1:
             user_domain = "01'er"
         if user_domain == 2:
@@ -607,6 +659,32 @@ def entire_game(player_name):
             user_domain = "L0L_C4P-S"
         if user_domain == 7:
             user_domain = "Anti09'er"
+        if user_domain == 8:
+            user_domain = "Xx_0H10-1T3_"
+        if user_domain == 9:
+            user_domain = "Wax01-Wax01_DA-"
+        if user_domain == 10:
+            user_domain = "Xx_XxxX_M-PIRE-"
+        if user_domain == 11:
+            user_domain = "abcdefghijklmnopqrstuvwxyz"
+        if user_domain == 12:
+            user_domain = "r_CUT_bee"
+        if user_domain == 13:
+            user_domain = "Anti5112967'er"
+        if user_domain == 14:
+            user_domain = "github-user"
+        if user_domain == 15:
+            user_domain = "0N3_PLU5_TW0_3QU4L5_"
+        if user_domain == 16:
+            user_domain = "min3craft_PLAYR"
+        if user_domain == 17:
+            user_domain = "gmrgmr"
+        if user_domain == 18:
+            user_domain = "wAX01_iN_c4P5_r3V3RS3"
+        if user_domain == 19:
+            user_domain = "Wax01_fr0m_"
+        if user_domain == 20:
+            user_domain = "XxXxWax01xXxX"
         user_id = random.randint(1000, 9999)
         enemy_name = user_domain + str(user_id)
         chat.append(f"{enemy_name}: I'm good at rock paper scissors!!!")
