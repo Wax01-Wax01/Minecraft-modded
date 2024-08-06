@@ -431,9 +431,9 @@ def entire_game(player_name):
     Server_Views = 0
     Flint = 0
     FlintAndSteel = 0
-    ExplosivePickaxes = 1
-    ExplosivePickaxesFortuneI = 1
-    BlockBreakFortuneI = 1
+    ExplosivePickaxes = 0
+    ExplosivePickaxesFortuneI = 0
+    BlockBreakFortuneI = 0
     block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0]
