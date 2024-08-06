@@ -601,7 +601,7 @@ def entire_game(player_name):
         game[82] = 'F'
         place = 399
         try:
-            Wood = int(input('How much wood do you want? '))
+            block_count[1] = int(input('How much wood do you want? '))
         except ValueError:
             pass
     if gamemode == '837uc41nnc39crn' and username == 'Wax01':
@@ -609,7 +609,7 @@ def entire_game(player_name):
     if gamemode.upper() == 'BEDWARS':
         block_count[0] = 0
         block_count[1] = 5
-        Lotteries = 0
+        block_count[16] = 0
         game[420:430] = '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪', '▪'
         game[399] = '|'
         game[378] = '|'
