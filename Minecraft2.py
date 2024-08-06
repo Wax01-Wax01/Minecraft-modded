@@ -818,22 +818,22 @@ def entire_game(player_name):
             print(f'Your server has {Server_Views} views!')
 
         if gamemode == 'bedwars' and -9 <= x_pos <= -6 and (-9 <= y_pos <= -6 or 5 <= y_pos <= 8):  # Asks for what to do.
-            move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or buy something (bs)? ")
+            move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \nbuy something (bs)? ")
         else:
             if gamemode == 'peaceful' or gamemode == 'survival':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble or craft or use a chest (uac) or \nexplode a tnt (eat) or toggle an effect (tae/eep)? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \ncraft or use a chest (uac) or explode a tnt (eat) or toggle an effect (tae/eep)? ")
             elif gamemode == 'parkour':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble on a lottery (goal)? ")
             elif gamemode == 'rock paper scissors':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or chat or gamble or play rock paper scissors (prps)? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or chat or gamble on a lottery (goal) or play rock paper scissors (prps)? ")
             elif gamemode == 'creative':
                 move = input(
-                    "Do u want 2 move up (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or move down (s) or chat or gamble? ")
+                    "Do u want 2 move up (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or move down (s) or chat or \ngamble on a lottery (goal)? ")
             elif gamemode == 'explosion survival':
                 move = input(
-                    "Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or chat or gamble? ")
+                    "Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or chat or gamble on a lottery (goal)? ")
             else:
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal)? ")
 
         last_move = ''  # Doing the action
         if (move.upper() == 'JUMP' or move.upper() == ' ' or move.upper() == 'W' or move.upper() == 'UP'):
@@ -950,9 +950,20 @@ def entire_game(player_name):
             chat.append(chat_message)
             if chat_message.upper() == f'{username.upper()}: /GAMEMODE ':
                 chat.append(f'Current gamemode is {gamemode}')
-        elif (move.upper() == 'GAMBLE'
-              and gamemode != 'bedwars'):
-            lottery()
+            if chat_message.upper() == f'{username.upper()}: /TIME_SPENT ':
+                chat.append(f'You have spent {Time_Spent} seconds on this server')
+            if chat_message.upper() == f'{username.upper()}: /MESSAGES ':
+                chat.append(f'There are {len(chat)} messages on this server.')
+        elif (move.upper() == 'GAMBLE' or move.upper() == 'GOAL' or move.upper() == 'GAMBLE ON A LOTTERY'):
+            x = input('x? ')
+            y = input('y? ')
+            try:
+                place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(
+                    np.floor(game_size / 2))
+                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '7':
+                    lottery()
+            except ValueError:
+                pass
         elif (move.upper() == 'BS' or move.upper() == 'BUY SOMETHING') and gamemode == 'bedwars' and -9 <= x_pos <= -6 and (-9 <= y_pos <= -6 or 5 <= y_pos <= 8):
             buy = input('Do you want to buy 5 grass and wood for 20 lotteries (A) or 5 leaves for 50 lotteries (B) or 10 grass and wood and 2 leaves for 50 lotteries (C)? ')
             if buy.upper() == 'A' and block_count[16] >= 20:
