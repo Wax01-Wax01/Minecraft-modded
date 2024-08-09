@@ -438,9 +438,9 @@ def entire_game(player_name):
     ExplosivePickaxes = 0
     ExplosivePickaxesFortuneI = 0
     BlockBreakFortuneI = 0
-    block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7']
-    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES']
-    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0]
+    block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7', '#']
+    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA']
+    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0]
     Enemy_Bed = None
     Your_Bed = None
     G1 = 0
@@ -909,9 +909,9 @@ def entire_game(player_name):
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == ' ':
                     if gamemode == 'bedwars':
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma? ')
                     else:
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries or magma? ')
                     for i in range(len(block_count)):
                         if block.upper() == block_names[i]:
                             if gamemode == 'creative':
@@ -984,7 +984,7 @@ def entire_game(player_name):
                 block_count[16] -= 50
         elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival'):
             print('Crafting Recipes:')
-            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe \n7. 4 stone and 1 tnt -> 1 lucky block \n8. 1 chest, 4 planks, and 4 stone -> 1 lottery \n9. 2 lotteries -> 1 Block Break (Fortune I) \n10. 1 Explosive Pickaxe and 3 Lotteries -> 1 Explosive Pickaxe (Fortune I)')
+            print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe \n7. 4 stone and 1 tnt -> 1 lucky block \n8. 1 chest, 4 planks, and 4 stone -> 1 lottery \n9. 2 lotteries -> 1 block break (Fortune I) \n10. 1 explosive pickaxe and 3 lotteries -> 1 explosive pickaxe (Fortune I) \n11. 1 coal and 4 stone -> 4 Magma')
             craft = input('Which recipe you want to craft? (Choose Number) ')
             if craft == '1':
                 craft_count = input(f'How many times do you want to craft recipe {craft}? ')
@@ -1058,6 +1058,13 @@ def entire_game(player_name):
                         ExplosivePickaxesFortuneI += 1 * int(craft_count)
                         if ExplosivePickaxes <= 0 and ExplosivePickEquip:
                             ExplosivePickEquip = False
+            if craft == '11':
+                craft_count = input(f'How many times do you want to craft recipe {craft}? ')
+                if craft_count.isdigit():
+                    if block_count[3] >= 4 * int(craft_count) and block_count[6] >= 1 * int(craft_count):
+                        block_count[3] -= 4 * int(craft_count)
+                        block_count[6] -= 1 * int(craft_count)
+                        block_count[17] += 4 * int(craft_count)
 
         elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival'):
             x = input('x? ')
@@ -1259,6 +1266,10 @@ def entire_game(player_name):
 
         x_pos = int((place % (game_size**2)) % game_size - np.floor(game_size/2))  # Coordinate Converter
         y_pos = int(-1 * ((place % (game_size**2)) // game_size) + np.floor(game_size/2))
+
+        if (gamemode == 'explosion survival' or gamemode == 'survival') and place + game_size < game_size ** 2:
+            if game[place + game_size] == '#':
+                hp -= 2
 
         if gamemode == 'skywars' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):  # More gamemode functionality
             print('You Died! You fell into the void!')
