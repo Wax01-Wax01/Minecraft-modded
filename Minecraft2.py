@@ -449,6 +449,7 @@ def entire_game(player_name):
     ExplosivePickEquip = False
     ExplosivePickFortuneIEquip = False
     BlockBreakFortuneIEquip = False
+    burn_time = 0
 
     if gamemode.upper() == 'SKYWARS' or gamemode.upper() == 'BEDWARS':
         game_size = 21
@@ -790,6 +791,8 @@ def entire_game(player_name):
                 up_speed = 0
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and hp < 20:  # Regeneration of health
             hp += 1
+        if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
+            burn_time -= 1
 
         for message in chat:  # Generates Inventory summary message and coordinates
             print(message)
@@ -797,6 +800,8 @@ def entire_game(player_name):
         while k < game_size:
             print(game[k * game_size: (k + 1) * game_size])
             k += 1
+        if burn_time > 0:
+            print(f'🔥 {burn_time}')
         summary = 'Inventory: '
         for index in range(len(block_count)):
             summary += f'{block_count[index]} {block_names[index].lower()}, '
@@ -1271,7 +1276,10 @@ def entire_game(player_name):
 
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place + game_size < game_size ** 2:
             if game[place + game_size] == '#':
-                hp -= 2
+                burn_time = 3
+
+        if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
+            hp -= 2
 
         if gamemode == 'skywars' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):  # More gamemode functionality
             print('You Died! You fell into the void!')
