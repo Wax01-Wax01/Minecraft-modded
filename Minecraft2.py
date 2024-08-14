@@ -767,6 +767,13 @@ def entire_game(player_name):
 
     def explode_tnt(tnt_x, tnt_y, explosion_range, block_multi):  # Explodes TNT
         explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
+        y_expl = int(-1 * ((explode_origin % (game_size**2)) // game_size) + np.floor(game_size/2))
+        vel_up = 0
+        if explosion_range == tnt_explosion_range:
+            if abs(y_pos - y_expl) == 1:
+                vel_up = 2 * (y_pos - y_expl)
+            elif abs(y_pos - y_expl) == 2:
+                vel_up = 0.5 * (y_pos - y_expl)
         for explode_index in explosion_range:
             if game_size ** 2 > explode_origin + explode_index >= 0:
                 if game[explode_origin + explode_index] != '🙂':
@@ -777,6 +784,7 @@ def entire_game(player_name):
                             else:
                                 block_count[block_test] += 1
                     game[explode_origin + explode_index] = ' '
+        return vel_up
 
 
     hp = 20
@@ -1202,7 +1210,7 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(np.floor(game_size / 2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '⚠':
-                    explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range)
+                    up_speed += explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range, 1)
                     block_count[14] -= 1
             except ValueError:
                 pass
