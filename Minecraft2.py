@@ -427,6 +427,7 @@ def entire_game(player_name):
     chat = [f'Welcome to server {Server} in {gamemode}!', f'{username} joined', f"Tip: {random.choice(['You can do a 3 block vertical jump!', "Breaking a village house's chest can give you up to 2 diamonds!", "Craft a chest with 8 planks.", 'Explode a TNT with flint and steel!', "You won't get the items in a chest if you explode them with TNT."])}"]
     i = 1
     up_speed = 0
+    right_speed = 0
     last_tree = -5
     last_vill_house = -15
     # Adds the items list
@@ -767,13 +768,20 @@ def entire_game(player_name):
 
     def explode_tnt(tnt_x, tnt_y, explosion_range, block_multi):  # Explodes TNT
         explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
+        x_expl = int((place % (game_size ** 2)) % game_size - np.floor(game_size / 2))
         y_expl = int(-1 * ((explode_origin % (game_size**2)) // game_size) + np.floor(game_size/2))
         vel_up = 0
+        vel_right = 0
         if explosion_range == tnt_explosion_range:
             if abs(y_pos - y_expl) == 1:
                 vel_up = 2 * (y_pos - y_expl)
             elif abs(y_pos - y_expl) == 2:
                 vel_up = int(0.5 * (y_pos - y_expl))
+            
+            if abs(x_pos - x_expl) == 1:
+                vel_right = 2 * (x_pos - x_expl)
+            elif abs(x_pos - x_expl) == 2:
+                vel_right = int(0.5 * (x_pos - x_expl))
         for explode_index in explosion_range:
             if game_size ** 2 > explode_origin + explode_index >= 0:
                 if game[explode_origin + explode_index] != '🙂':
@@ -784,7 +792,7 @@ def entire_game(player_name):
                             else:
                                 block_count[block_test] += 1
                     game[explode_origin + explode_index] = ' '
-        return vel_up
+        return [vel_right, vel_up]
 
 
     hp = 20
@@ -1210,7 +1218,9 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(np.floor(game_size / 2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '⚠':
-                    up_speed += explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range, 1)
+                    vel_change = explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range, 1)
+                    right_speed += vel_change[0]
+                    up_speed += vel_change[1]
                     block_count[14] -= 1
             except ValueError:
                 pass
@@ -1275,6 +1285,26 @@ def entire_game(player_name):
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place + game_size < game_size ** 2:
                 if block_types.__contains__(game[place + game_size]):
                     hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
+        if right_speed > 0 and gamemode != 'creative':
+            i = 0
+            while i < right_speed:
+                game[place % (game_size**2)] = ' '
+                place += 1
+                if not block_types.__contains__(game[place]) and place % game_size != 0:
+                    game[place] = '🙂'
+                else:
+                    place -= 1
+                i += 1
+        if right_speed < 0 and gamemode != 'creative':
+            i = 0
+            while i < -1 * right_speed:
+                game[place % (game_size**2)] = ' '
+                place -= 1
+                if not block_types.__contains__(game[place]) and place % game_size != game_size - 1:
+                    game[place] = '🙂'
+                else:
+                    place += 1
+                i += 1
         game[place % (game_size**2)] = '🙂'
         if touching_ground is False:
             up_speed -= 1
