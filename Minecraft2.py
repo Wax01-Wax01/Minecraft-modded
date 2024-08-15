@@ -768,7 +768,7 @@ def entire_game(player_name):
 
     def explode_tnt(tnt_x, tnt_y, explosion_range, block_multi):  # Explodes TNT
         explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
-        x_expl = int((place % (game_size ** 2)) % game_size - np.floor(game_size / 2))
+        x_expl = int((explode_origin % (game_size ** 2)) % game_size - np.floor(game_size / 2))
         y_expl = int(-1 * ((explode_origin % (game_size**2)) // game_size) + np.floor(game_size/2))
         vel_up = 0
         vel_right = 0
@@ -777,7 +777,7 @@ def entire_game(player_name):
                 vel_up = 2 * (y_pos - y_expl)
             elif abs(y_pos - y_expl) == 2:
                 vel_up = int(0.5 * (y_pos - y_expl))
-            
+
             if abs(x_pos - x_expl) == 1:
                 vel_right = 2 * (x_pos - x_expl)
             elif abs(x_pos - x_expl) == 2:
@@ -1308,6 +1308,7 @@ def entire_game(player_name):
         game[place % (game_size**2)] = '🙂'
         if touching_ground is False:
             up_speed -= 1
+        right_speed = int(np.floor(right_speed * 0.8))
 
         x_pos = int((place % (game_size**2)) % game_size - np.floor(game_size/2))  # Coordinate Converter
         y_pos = int(-1 * ((place % (game_size**2)) // game_size) + np.floor(game_size/2))
