@@ -773,7 +773,7 @@ def entire_game(player_name):
             if abs(y_pos - y_expl) == 1:
                 vel_up = 2 * (y_pos - y_expl)
             elif abs(y_pos - y_expl) == 2:
-                vel_up = 0.5 * (y_pos - y_expl)
+                vel_up = int(0.5 * (y_pos - y_expl))
         for explode_index in explosion_range:
             if game_size ** 2 > explode_origin + explode_index >= 0:
                 if game[explode_origin + explode_index] != '🙂':
@@ -839,7 +839,7 @@ def entire_game(player_name):
         if gamemode == 'bedwars' and -9 <= x_pos <= -6 and (-9 <= y_pos <= -6 or 5 <= y_pos <= 8):  # Asks for what to do.
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \nbuy something (bs)? ")
         else:
-            if gamemode == 'peaceful' or gamemode == 'survival':
+            if gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \ncraft or use a chest (uac) or explode a tnt (eat) or toggle an effect (tae/eep)? ")
             elif gamemode == 'parkour':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble on a lottery (goal)? ")
@@ -997,7 +997,7 @@ def entire_game(player_name):
                 block_count[1] += 10
                 block_count[2] += 2
                 block_count[16] -= 50
-        elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival'):
+        elif move.upper() == 'CRAFT' and (gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival'):
             print('Crafting Recipes:')
             print('1. 1 wood -> 4 planks \n2. 8 planks -> 1 chest \n3. 3 planks -> 1 stair (any direction) \n4. 2 stone & 1 coal -> 1 flint \n5. 1 flint and 1 iron -> 1 flint and steel \n6. 2 planks and 3 tnt -> 1 explosive pickaxe \n7. 4 stone and 1 tnt -> 1 lucky block \n8. 1 chest, 4 planks, and 4 stone -> 1 lottery \n9. 2 lotteries -> 1 block break (Fortune I) \n10. 1 explosive pickaxe and 3 lotteries -> 1 explosive pickaxe (Fortune I) \n11. 1 coal and 4 stone -> 4 Magma')
             craft = input('Which recipe you want to craft? (Choose Number) ')
@@ -1081,7 +1081,7 @@ def entire_game(player_name):
                         block_count[6] -= 1 * int(craft_count)
                         block_count[17] += 4 * int(craft_count)
 
-        elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival'):
+        elif (move.upper() == 'USE A CHEST' or move.upper() == 'UAC') and (gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival'):
             x = input('x? ')
             y = input('y? ')
             try:
@@ -1204,7 +1204,7 @@ def entire_game(player_name):
                     chat.append(f'Server: {username} wins!')
                 else:
                     chat.append(f'Server: {enemy_name} wins!')
-        elif (move.upper() == 'EAT' or move.upper() == 'EXPLODE A TNT') and FlintAndSteel >= 1 and (gamemode == 'peaceful' or gamemode == 'survival'):
+        elif (move.upper() == 'EAT' or move.upper() == 'EXPLODE A TNT') and FlintAndSteel >= 1 and (gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival'):
             x = input('x? ')
             y = input('y? ')
             try:
