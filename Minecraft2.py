@@ -1308,7 +1308,10 @@ def entire_game(player_name):
         game[place % (game_size**2)] = '🙂'
         if touching_ground is False:
             up_speed -= 1
-        right_speed = int(np.floor(right_speed * 0.8))
+        if right_speed > 0:
+            right_speed = int(np.floor(right_speed * 0.8))
+        else:
+            right_speed = int(np.ceil(right_speed * 0.8))
 
         x_pos = int((place % (game_size**2)) % game_size - np.floor(game_size/2))  # Coordinate Converter
         y_pos = int(-1 * ((place % (game_size**2)) // game_size) + np.floor(game_size/2))
