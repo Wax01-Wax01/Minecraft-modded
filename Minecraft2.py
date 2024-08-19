@@ -1143,7 +1143,7 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
-                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes'
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 4]} explosive pickaxes (Fortune I), '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I)'
                     summary = 'Inventory: '
