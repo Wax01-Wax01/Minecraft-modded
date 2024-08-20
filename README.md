@@ -1,4 +1,31 @@
 # Minecraft-modded
- Minecraft modded V5
+ ## *Minecraft modded V5.3-beta*
 
  ![Minecraft-modded README pic](https://github.com/Wax01-Wax01/Minecraft-modded/assets/171621651/ef494bae-e059-4b93-a7c8-7c867c165c86)
+
+- # Features
+  - ## 18 different types of visible blocks
+  - ## 10 gamemodes
+    - ### What is a gamemode? A gamemode is a mode in the game.
+  - ## Customizable Game Size
+  - ## 3 commands
+  - ## 7 types of invisible items
+  - ## Health in 3 different gamemodes
+  - ## Skywars & Bedwars
+  - ## Natural Terrain
+  - ## Knockback (ex. Fireballs)
+  - ## TNT, Explosive Pickaxe, Fireballs
+  - ## Update Log/Changelog
+    - ### More features being added!
+  - ## A commit leaderboard!
+    - ### The commit leaderboard is to see who committed the most to this repo
+  - ## Cool seeds!
+    - ### Sometimes, the game can generate crazy seeds, like a 12 block slope!
+  - ## Lot's more!
+
+# Key Links:
+## ![CODE](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/Minecraft2.py)
+## ![COMMIT LEADERBOARD](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/README-commitLeaderboard.md)
+## ![UPDATE LOG](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/README-updateLog.md)
+
+# *💎ENJOY!🙂*
