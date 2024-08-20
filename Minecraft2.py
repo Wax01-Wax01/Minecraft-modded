@@ -439,6 +439,7 @@ def entire_game(player_name):
     ExplosivePickaxes = 0
     ExplosivePickaxesFortuneI = 0
     BlockBreakFortuneI = 0
+    fireballs = 100
     block_types = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7', '#']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0]
@@ -447,6 +448,7 @@ def entire_game(player_name):
     G1 = 0
     G2 = 0
     chest_items = {}
+    active_fireballs = []  # Format: [[place, x_velocity, y_velocity]]
     ExplosivePickEquip = False
     ExplosivePickFortuneIEquip = False
     BlockBreakFortuneIEquip = False
@@ -766,6 +768,11 @@ def entire_game(player_name):
     # Explosive pickaxe explosion range:
     explosive_pick_range = [-game_size, -1, 0, 1, game_size]
 
+    # Fireball explosion range:
+    fireball_explosion_range = [-game_size - 1, -game_size, -game_size + 1,
+                                -1, 0, 1,
+                                game_size - 1, game_size, game_size + 1]
+
     def explode_tnt(tnt_x, tnt_y, explosion_range, block_multi):  # Explodes TNT
         explode_origin = (game_size**2-int(np.ceil(game_size/2))) + tnt_x - tnt_y * game_size
         x_expl = int((explode_origin % (game_size ** 2)) % game_size - np.floor(game_size / 2))
@@ -782,6 +789,25 @@ def entire_game(player_name):
                 vel_right = 2 * (x_pos - x_expl)
             elif abs(x_pos - x_expl) == 2:
                 vel_right = int(0.5 * (x_pos - x_expl))
+        if explosion_range == fireball_explosion_range:
+            if abs(y_pos - y_expl) == 1:
+                vel_up = 4 * (y_pos - y_expl)
+            elif abs(y_pos - y_expl) == 2:
+                vel_up = int(1.5 * (y_pos - y_expl))
+            elif abs(y_pos - y_expl) == 3:
+                vel_up = int((y_pos - y_expl) / 1.5)
+            elif abs(y_pos - y_expl) == 4:
+                vel_up = 0.25 * (y_pos - y_expl)
+
+            if abs(x_pos - x_expl) == 1:
+                vel_right = 4 * (x_pos - x_expl)
+            elif abs(x_pos - x_expl) == 2:
+                vel_right = int(1.5 * (x_pos - x_expl))
+            elif abs(x_pos - x_expl) == 3:
+                vel_right = int((x_pos - x_expl) / 1.5)
+            elif abs(y_pos - y_expl) == 4:
+                vel_up = int(0.25 * (y_pos - y_expl))
+
         for explode_index in explosion_range:
             if game_size ** 2 > explode_origin + explode_index >= 0:
                 if game[explode_origin + explode_index] != '🙂':
@@ -831,6 +857,8 @@ def entire_game(player_name):
                 summary += f'{ExplosivePickaxesFortuneI} explosive pickaxes (Fortune I), '
                 summary += '\n'
                 summary += f'{BlockBreakFortuneI} block break (Fortune I), '
+            if index == 17:
+                summary += f'{fireballs} fireballs, '
             if index % 7 == 6:
                 summary += '\n'
         if gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival':
@@ -1103,7 +1131,10 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 0]} saplings, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
-                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes'
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes, '
+                    chest_summary += '\n'
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 4]} explosive pickaxes (Fortune I), '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I)'
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -1144,6 +1175,7 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 1]} flint, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 2]} flint and steel, '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes, '
+                    chest_summary += '\n'
                     chest_summary += f'{chest_items[place_break][len(block_count) + 4]} explosive pickaxes (Fortune I), '
                     chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I)'
                     summary = 'Inventory: '
@@ -1258,6 +1290,23 @@ def entire_game(player_name):
                 else:
                     BlockBreakFortuneIEquip = False
                     print('Block Break (Fortune I) unequipped.')
+        elif (move.upper() == 'UAF' or move.upper() == 'USE A FIREBALL') and (gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival') and fireballs > 0:
+            direction = input('Enter the direction: (WASD) ')
+            fire_x = 0
+            fire_y = 0
+            if len(direction) > 0:
+                if direction.lower().__contains__('w'):
+                    fire_y += 1
+                if direction.lower().__contains__('a'):
+                    fire_x -= 1
+                if direction.lower().__contains__('s'):
+                    fire_y -= 1
+                if direction.lower().__contains__('d'):
+                    fire_x += 1
+            if fire_x != 0 or fire_y != 0:
+                active_fireballs.append([place, fire_x, fire_y])
+                fireballs -= 1
+
 
         game[place % (game_size**2)] = ' '  # Adds Gravity
         if up_speed > 0 and gamemode != 'creative':
@@ -1322,6 +1371,37 @@ def entire_game(player_name):
 
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
             hp -= 2
+
+        for clone_fireball in range(game.count('!')):
+            game[game.index('!')] = ' '
+
+        for fireball_info in range(len(active_fireballs[:])):  # Display fireballs as '!'
+            moving_pos = active_fireballs[fireball_info][0] + active_fireballs[fireball_info][1] + active_fireballs[fireball_info][2] * -game_size
+            vel_change = [0, 0]
+            if moving_pos >= game_size * (game_size - 1) - 1:
+                vel_change = explode_tnt(int((active_fireballs[fireball_info][0] % (game_size**2)) % game_size - np.floor(game_size/2)),
+                            int(-1 * ((active_fireballs[fireball_info][0] % (game_size**2)) // game_size) + np.floor(game_size/2)) + (int(np.ceil(game_size / 2)) - 1),
+                            fireball_explosion_range,
+                            1)
+                active_fireballs.remove(active_fireballs[fireball_info])
+            elif moving_pos <= game_size:
+                vel_change = explode_tnt(int((active_fireballs[fireball_info][0] % (game_size**2)) % game_size - np.floor(game_size/2)),
+                            int(-1 * ((active_fireballs[fireball_info][0] % (game_size**2)) // game_size) + np.floor(game_size/2)) + (int(np.ceil(game_size / 2)) - 1),
+                            fireball_explosion_range,
+                            1)
+                active_fireballs.remove(active_fireballs[fireball_info])
+            elif game[moving_pos] != ' ' and game[moving_pos] != '🙂':
+                vel_change = explode_tnt(int((active_fireballs[fireball_info][0] % (game_size**2)) % game_size - np.floor(game_size/2)),
+                            int(-1 * ((active_fireballs[fireball_info][0] % (game_size**2)) // game_size) + np.floor(game_size/2)) + (int(np.ceil(game_size / 2)) - 1),
+                            fireball_explosion_range,
+                            1)
+                active_fireballs.remove(active_fireballs[fireball_info])
+            else:
+                active_fireballs[fireball_info] = [moving_pos, active_fireballs[fireball_info][1], active_fireballs[fireball_info][2]]
+                if game[moving_pos] != '🙂':
+                    game[moving_pos] = '!'
+            right_speed += vel_change[0]
+            up_speed += vel_change[1]
 
         if gamemode == 'skywars' and place + 2*game_size > game_size**2-1 and not block_types.__contains__(game[(place + game_size) % (game_size**2)]):  # More gamemode functionality
             print('You Died! You fell into the void!')
