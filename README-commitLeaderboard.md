@@ -41,3 +41,5 @@ _**CHAT 🗨️**_
 **Wax01-Wax01: 13 ahead, NOICE!!!**
 
 **Wax01-Wax01: I'm at 39 commits**
+
+# Congrats if you made it this far! 💎🎉🚀🌟
