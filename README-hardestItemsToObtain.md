@@ -4,7 +4,7 @@
 ### This item requires an explosive pickaxe, and 3 lotteries. 3 lotteries is no joke as of now!
 ## TOP 🥈: Block Break (Fortune I)
 ### 2 lotteries. 2 lotteries is no joke as of now!
-## TOP 🥉: Lottery
+## TOP 🥉: Lottery (>= 2)
 ### Lotteries aren't very easy to get. No wonder how the top 2 need lotteries to make!
 ## TOP 4️⃣: Diamond
 ### Going Mining! Well maybe you should loot villages instead...
