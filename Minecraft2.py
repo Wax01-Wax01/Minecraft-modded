@@ -1376,6 +1376,8 @@ def entire_game(player_name):
             game[game.index('!')] = ' '
 
         for fireball_info in range(len(active_fireballs[:])):  # Display fireballs as '!'
+            if fireball_info >= len(active_fireballs):
+                break
             moving_pos = active_fireballs[fireball_info][0] + active_fireballs[fireball_info][1] + active_fireballs[fireball_info][2] * -game_size
             vel_change = [0, 0]
             if moving_pos >= game_size * (game_size - 1) - 1:
