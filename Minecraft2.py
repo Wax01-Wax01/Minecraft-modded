@@ -1305,6 +1305,7 @@ def entire_game(player_name):
                     fire_x += 1
             if fire_x != 0 or fire_y != 0:
                 active_fireballs.append([place, fire_x, fire_y])
+                burn_time = 2
                 fireballs -= 1
 
 
