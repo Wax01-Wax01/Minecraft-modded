@@ -287,6 +287,7 @@ def entire_game(player_name):
         chest_items[place - game_size - 1].append(0)  # Explosive Pickaxes
         chest_items[place - game_size - 1].append(0)  # Explosive Pickaxes (Fortune I)
         chest_items[place - game_size - 1].append(0)  # Block Break (Fortune I)
+        chest_items[place - game_size - 1].append(0)  # Fireballs
         chest_items[place - game_size - 1][1] = random.randint(2, 7)
         chest_items[place - game_size - 1][2] = random.randint(5, 13)
         chest_items[place - game_size - 1][3] = random.randint(1, 4)
@@ -876,7 +877,7 @@ def entire_game(player_name):
             move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \nbuy something (bs)? ")
         else:
             if gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival':
-                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \ncraft or use a chest (uac) or explode a tnt (eat) or toggle an effect (tae/eep)? ")
+                move = input("Do u want 2 jump (w), move left (a) or move right (d) or break a block (bab) or place a block (pab) or chat or gamble on a lottery (goal) or \ncraft or use a chest (uac) or explode a tnt (eat) or toggle an effect (tae/eep) or use a fireball (uaf)? ")
             elif gamemode == 'parkour':
                 move = input("Do u want 2 jump (w), move left (a) or move right (d) or place a block (pab) or chat or gamble on a lottery (goal)? ")
             elif gamemode == 'rock paper scissors':
@@ -943,6 +944,7 @@ def entire_game(player_name):
                                     ExplosivePickaxes += chest_items[place_break][len(block_count) + 3]
                                     ExplosivePickaxesFortuneI += chest_items[place_break][len(block_count) + 4]
                                     BlockBreakFortuneI += chest_items[place_break][len(block_count) + 5]
+                                    fireballs += chest_items[place_break][len(block_count) + 6]
                                     del chest_items[place_break]
                                 if game[place_break] == '?':
                                     lucky_block = True
@@ -977,6 +979,7 @@ def entire_game(player_name):
                                     chest_items[place_break].append(0)  # Explosive Pickaxes
                                     chest_items[place_break].append(0)  # Explosive Pickaxes (Fortune I)
                                     chest_items[place_break].append(0)  # Block Break (Fortune I)
+                                    chest_items[place_break].append(0)  # Fireballs
                             elif block_count[i] > 0:
                                 if gamemode != 'bedwars' or i != 16:
                                     game[place_break] = block_types[i]
@@ -991,6 +994,7 @@ def entire_game(player_name):
                                     chest_items[place_break].append(0)  # Explosive Pickaxes
                                     chest_items[place_break].append(0)  # Explosive Pickaxes (Fortune I)
                                     chest_items[place_break].append(0)  # Block Break (Fortune I)
+                                    chest_items[place_break].append(0)  # Fireballs
                     if block.upper() == 'SAPLINGS':
                         if gamemode == 'creative':
                             spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
@@ -1134,7 +1138,8 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes, '
                     chest_summary += '\n'
                     chest_summary += f'{chest_items[place_break][len(block_count) + 4]} explosive pickaxes (Fortune I), '
-                    chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I)'
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I), '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 6]} fireballs'
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -1166,6 +1171,10 @@ def entire_game(player_name):
                     if item_count <= BlockBreakFortuneI:
                         BlockBreakFortuneI -= item_count
                         chest_items[place_break][len(block_count) + 5] += item_count
+                    item_count = int(input(f'How many fireballs do you want to put in the chest? '))
+                    if item_count <= fireballs:
+                        fireballs -= item_count
+                        chest_items[place_break][len(block_count) + 6] += item_count
                     chest_summary = 'Chest contains: '
                     for i in range(len(block_count)):
                         chest_summary += f'{chest_items[place_break][i]} {block_names[i].lower()}, '
@@ -1177,7 +1186,8 @@ def entire_game(player_name):
                     chest_summary += f'{chest_items[place_break][len(block_count) + 3]} explosive pickaxes, '
                     chest_summary += '\n'
                     chest_summary += f'{chest_items[place_break][len(block_count) + 4]} explosive pickaxes (Fortune I), '
-                    chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I)'
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 5]} block break (Fortune I), '
+                    chest_summary += f'{chest_items[place_break][len(block_count) + 6]} fireballs'
                     summary = 'Inventory: '
                     for index in range(len(block_count)):
                         summary += f'{block_count[index]} {block_names[index].lower()}, '
@@ -1191,6 +1201,8 @@ def entire_game(player_name):
                             summary += f'{ExplosivePickaxesFortuneI} explosive pickaxes (Fortune I), '
                             summary += '\n'
                             summary += f'{BlockBreakFortuneI} block break (Fortune I), '
+                        if index == 17:
+                            summary += f'{fireballs} fireballs, '
                     print(f'Player: {summary}')
                     print(chest_summary)
                     for i in range(len(block_count)):
@@ -1218,10 +1230,14 @@ def entire_game(player_name):
                     if item_count <= chest_items[place_break][len(block_count) + 4]:
                         ExplosivePickaxesFortuneI += item_count
                         chest_items[place_break][len(block_count) + 4] -= item_count
-                    item_count = int(input(f'How many explosive pickaxes do you want take from the chest? '))
+                    item_count = int(input(f'How much block break (Fortune I) do you want take from the chest? '))
                     if item_count <= chest_items[place_break][len(block_count) + 5]:
                         BlockBreakFortuneI += item_count
                         chest_items[place_break][len(block_count) + 5] -= item_count
+                    item_count = int(input(f'How many fireballs do you want take from the chest? '))
+                    if item_count <= chest_items[place_break][len(block_count) + 6]:
+                        fireballs += item_count
+                        chest_items[place_break][len(block_count) + 6] -= item_count
             except ValueError:
                 pass
         elif (move.upper() == 'PRPS' or move.upper() == 'PLAY ROCK PAPER SCISSORS') and gamemode == 'rock paper scissors':
