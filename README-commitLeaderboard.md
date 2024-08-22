@@ -1,10 +1,12 @@
 **_COMMIT LEADERBOARD_**
 
-**🥇. Wax01-Wax01 - 3️⃣9️⃣ commits**
+**KEY: 🔥: >= 5 commits per week, 📈: Fastest**
+
+**🥇. Wax01-Wax01 - 1️⃣0️⃣8️⃣ commits 🔥📈**
 
 **🥈. liyongwang2018 - 5️⃣ commits**
 
-**🥉.**
+**🥉. DemiYW - 1️⃣ commit**
 
 **4️⃣.**
 
@@ -26,7 +28,7 @@
 
                                     ____________________________
 
-**3️⃣9️⃣ commits - 🥇 Wax01-Wax01 |--[GAP: 3️⃣4️⃣ COMMITS]--| liyongwang2018 🥈 - 5️⃣ commits**
+**5️⃣ commits - 🥈 liyongwang2018 |--[GAP: 3️⃣4️⃣ COMMITS]--| DemiYW 🥉 - 1️⃣ commit**
  
                                     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -41,5 +43,7 @@ _**CHAT 🗨️**_
 **Wax01-Wax01: 13 ahead, NOICE!!!**
 
 **Wax01-Wax01: I'm at 39 commits**
+
+**Wax01-Wax01: Haven't updated this in a while, btw I HIT 1️⃣0️⃣0️⃣ COMMITS!!! 🔥📈**
 
 # Congrats if you made it this far! 💎🎉🚀🌟
