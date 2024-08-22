@@ -28,5 +28,6 @@
 ## ![COMMIT LEADERBOARD](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/README-commitLeaderboard.md)
 ## ![UPDATE LOG](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/README-updateLog.md)
 ## ![TRY TO GET THESE ITEMS](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/README-hardestItemsToObtain.md)
+## ![COOL SEEDS HERE](https://github.com/Wax01-Wax01/Minecraft-modded/tree/main/Cool%20Seeds)
 
 # *💎ENJOY!🙂*
