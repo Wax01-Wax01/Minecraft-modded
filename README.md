@@ -1,5 +1,5 @@
 # Minecraft-modded
- ## *Minecraft modded V5️⃣.3️⃣*
+ ## Minecraft modded V5️⃣.3️⃣.1️⃣
 
  ![Minecraft-modded README pic](https://github.com/Wax01-Wax01/Minecraft-modded/assets/171621651/ef494bae-e059-4b93-a7c8-7c867c165c86)
 
@@ -21,6 +21,8 @@
     - ### The commit leaderboard is to see who committed the most to this repo
   - ## Cool seeds!
     - ### Sometimes, the game can generate crazy seeds, like a 12 block slope!
+  - ## 🍀 Lucky Blocks 🍀
+  - ## Text to emoji
   - ## Lot's more!
 
 # Key Links:

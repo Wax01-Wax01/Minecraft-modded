@@ -952,7 +952,10 @@ def entire_game(player_name):
                                 break
                         if lucky_block:
                             block_count[15] -= block_multiplier
-                            game[place_break] = random.choice(block_types)
+                            for offset in explosive_pick_range:
+                                if 0 <= place_break + offset < game_size ** 2:
+                                    if game[place_break + offset] == ' ':
+                                        game[place_break + offset] = random.choice(block_types)
             except ValueError:
                 pass
         elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors' and gamemode != 'explosion survival':

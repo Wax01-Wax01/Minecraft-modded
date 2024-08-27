@@ -5,7 +5,7 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
-**Current version: V5️⃣.3️⃣**
+**Current version: V5️⃣.3️⃣.1️⃣**
 
 **Key:** ⭐: **Current Version Range,**  🎉: **Base Version!!!**
 

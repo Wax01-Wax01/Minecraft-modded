@@ -2,6 +2,13 @@
 
 ## Welcome to Minecraft-modded! 
 
+### 8/26/2024: Buffed Lucky Blocks! 🍀💪
+**Lucky Blocks produce up to 5 random blocks now. WAY more OP!**
+
+### ( Wax01-Wax01 )
+### ( V5️⃣.3️⃣.1️⃣ )
+### |
+### |
 ### 8/21/2024: Fireball Addition Complete! _🔥🎱🔥 ➕_
 **Fireball creation has been completed! _🔥🎱🔥_**
 
