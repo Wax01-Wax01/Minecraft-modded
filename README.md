@@ -1,6 +1,8 @@
 # Minecraft-modded
  ## Minecraft modded V5️⃣.3️⃣.1️⃣
 
+ [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
  ![Minecraft-modded README pic](https://github.com/Wax01-Wax01/Minecraft-modded/assets/171621651/ef494bae-e059-4b93-a7c8-7c867c165c86)
 
 - # Features
