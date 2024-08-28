@@ -1,12 +1,12 @@
 **_COMMIT LEADERBOARD_**
 
-**KEY: 🔥: >= 5 commits per week, 📈: Fastest**
+**KEY: 💎⬆️🔥⬆️💎: >= 20 commits per week, ⬆️🔥⬆️: 10-19 commits per week 🔥: 5-9 commits per week, 📈: Fastest, ⏫: 2nd fastest, 🔼: 3rd fastest**
 
-**🥇. Wax01-Wax01 - 1️⃣0️⃣8️⃣ commits 🔥📈**
+**🥇. Wax01-Wax01 - 1️⃣0️⃣4️⃣ commits [⬆️🔥⬆️📈]**
 
-**🥈. liyongwang2018 - 5️⃣ commits**
+**🥈. liyongwang2018 - 5️⃣ commits [⏫]**
 
-**🥉. DemiYW - 1️⃣ commit**
+**🥉. DemiYW - 1️⃣ commit [🔼]**
 
 **4️⃣.**
 
@@ -22,15 +22,17 @@
 
 **🔟.**
 
-**TOTAL: 4️⃣4️⃣ commits**
+**TOTAL: 1️⃣2️⃣0️⃣ commits ⬆️🔥⬆️**
 
 **_Cool Commit Gap Display:_**
 
-                                    ____________________________
+                                      ____________________________
 
-**5️⃣ commits - 🥈 liyongwang2018 |--[GAP: 3️⃣4️⃣ COMMITS]--| DemiYW 🥉 - 1️⃣ commit**
- 
-                                    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+**[⏫] 5️⃣ commits - 🥈 liyongwang2018 |--[GAP:  4️⃣ COMMITS]--| DemiYW 🥉 - 1️⃣ commit [🔼]**
+   
+                                      ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+**[\[INSIGHTS GRAPHS\]](https://github.com/Wax01-Wax01/Minecraft-modded/graphs/contributors) NOTE: @DemiYW has technically contributed, so that's why this file is different from the insights graph.**
 
 _**CHAT 🗨️**_
 
