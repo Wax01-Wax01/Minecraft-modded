@@ -2,9 +2,9 @@
 
 **KEY: 💎⬆️🔥⬆️💎: >= 20 commits per week, ⬆️🔥⬆️: 10-19 commits per week 🔥: 5-9 commits per week, 📈: Fastest, ⏫: 2nd fastest, 🔼: 3rd fastest**
 
-**🥇. Wax01-Wax01 - 1️⃣0️⃣5️⃣ commits [🔥📈]**
+**🥇. Wax01-Wax01 - 1️⃣0️⃣7️⃣ commits [📈]**
 
-**🥈. liyongwang2018 - 5️⃣ commits [⏫]**
+**🥈. liyongwang2018 - 6️⃣ commits [⏫]**
 
 **🥉. DemiYW - 1️⃣ commit [🔼]**
 
@@ -22,7 +22,7 @@
 
 **🔟.**
 
-**TOTAL: 1️⃣2️⃣1️⃣ commits 🔥**
+**TOTAL: 1️⃣2️⃣1️⃣ commits**
 
 **_Cool Commit Gap Display:_**
 
