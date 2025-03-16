@@ -7,7 +7,7 @@ import numpy as np
 
 
 # Entire game function
-def entire_game(player_name):
+def entire_game(player_name, texture):
     Time_Spent = 0
     game_size = 21
     vill_houses = {}  # List of villages
@@ -27,15 +27,15 @@ def entire_game(player_name):
 
     # Village house model
     vill_house = [
-        '  ', '  ', '  ', '🟨', '  ', '  ', '  ',
-        '  ', '  ', '🟨', '  ', '🟨', '  ', '  ',
-        '  ', '🟨', '  ', '  ', '  ', '🟨', '  ',
-        '🪵 ', '  ', '  ', '  ', '  ', '  ', '🪵 ',
-        '🪵 ', '  ', '  ', '  ', '  ', '  ', '🪵 ',
-        '🪵 ', '  ', '  ', '  ', '  ', '  ', '🪵 ',
-        '🪵 ', '  ', '  ', '  ', '  ', '  ', '🪵 ',
-        '  ', '  ', '📦', '🪨 ', '🪨 ', '  ', '  ',
-        '🟨', '🟨', '🟨', '🟨', '🟨', '🟨', '🟨',
+        '  ', '  ', '  ', texture[4], '  ', '  ', '  ',
+        '  ', '  ', texture[4], '  ', texture[4], '  ', '  ',
+        '  ', texture[4], '  ', '  ', '  ', texture[4], '  ',
+        texture[1], '  ', '  ', '  ', '  ', '  ', texture[1],
+        texture[1], '  ', '  ', '  ', '  ', '  ', texture[1],
+        texture[1], '  ', '  ', '  ', '  ', '  ', texture[1],
+        texture[1], '  ', '  ', '  ', '  ', '  ', texture[1],
+        '  ', '  ', texture[5], texture[3], texture[3], '  ', '  ',
+        texture[4], texture[4], texture[4], texture[4], texture[4], texture[4], texture[4],
     ]
 
 
@@ -53,7 +53,7 @@ def entire_game(player_name):
         for y_axis_change in range(5):
             for x_axis_change in range(3):
                 if list(binary_capital_letter_codes_rps[character_display])[index_display] == '1':
-                    game[left_corner_place + x_display + y_display * 51] = '💎'
+                    game[left_corner_place + x_display + y_display * 51] = texture[9]
 
                 x_display += 1
                 index_display += 1
@@ -248,32 +248,32 @@ def entire_game(player_name):
         while k < height:
             place -= game_size
             if place > 0:
-                game[place] = '🪵 '
+                game[place] = texture[1]
 
             k += 1
         if place - 1 >= 1:
-            game[place - 1] = '🥬'
+            game[place - 1] = texture[2]
 
         if place + 1 >= 1:
-            game[place + 1] = '🥬'
+            game[place + 1] = texture[2]
 
         if place + (game_size - 1) >= 0:
-            game[place + (game_size - 1)] = '🥬'
+            game[place + (game_size - 1)] = texture[2]
 
         if place + (game_size + 1) >= 0:
-            game[place + (game_size + 1)] = '🥬'
+            game[place + (game_size + 1)] = texture[2]
 
         if place - game_size >= 0:
-            game[place - game_size] = '🥬'
+            game[place - game_size] = texture[2]
 
         if place - (game_size + 1) >= 0:
-            game[place - (game_size + 1)] = '🥬'
+            game[place - (game_size + 1)] = texture[2]
 
         if place - (game_size - 1) >= 0:
-            game[place - (game_size - 1)] = '🥬'
+            game[place - (game_size - 1)] = texture[2]
 
         if place - 2*game_size >= 0:
-            game[place - 2*game_size] = '🥬'
+            game[place - 2*game_size] = texture[2]
 
 
 
@@ -314,7 +314,7 @@ def entire_game(player_name):
             while True:
                 if block_place < game_size ** 2:
                     if game[block_place] == '  ':
-                        game[block_place] = '🟩'
+                        game[block_place] = texture[0]
 
                     else:
                         break
@@ -352,7 +352,7 @@ def entire_game(player_name):
                 while True:
                     if block_place < game_size ** 2:
                         if game[block_place] == '  ':
-                            game[block_place] = '🟩'
+                            game[block_place] = texture[0]
 
                         else:
                             break
@@ -454,7 +454,7 @@ def entire_game(player_name):
     BlockBreakFortuneI = 0
     fireballs = 100
     # VS Code Texture Pack (Wood, Stone, and have an extra space to align the columns):
-    block_types = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃']
+    block_types = [texture[0], texture[1], texture[2], texture[3], texture[4], texture[5], texture[6], texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[14], texture[15], texture[16], texture[17], texture[18], texture[19], texture[20], texture[21], texture[22]]
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100]
     entities = []
@@ -573,25 +573,25 @@ def entire_game(player_name):
             place = game_size * (game_size-1) + i - y_terrain * game_size
             while j >= 0:
                 if y_terrain - j > random.randint(4, 5):
-                    game[place] = '🪨 '
+                    game[place] = texture[3]
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = '🔳'
+                        game[place] = texture[6]
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(16 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = '⬜'
+                        game[place] = texture[7]
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(23 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = '🪙 '
+                        game[place] = texture[8]
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = '💎'
+                        game[place] = texture[9]
 
                 else:
-                    game[place] = '🟩'
+                    game[place] = texture[0]
 
                 if random.randint(1, 3) == 1 and gamemode.upper() == 'HARD SURVIVAL':
-                    game[place] = random.choice(['  ', '🔥'])
+                    game[place] = random.choice(['  ', texture[17]])
                 place += game_size
                 j -= 1
             tree = random.randint(1, 12 - (i - last_tree))
@@ -642,85 +642,85 @@ def entire_game(player_name):
             else:
                 l = 0
                 while game[place + l * game_size] == '  ' and place + l * game_size < game_size ** 2 - game_size:
-                    game[place + l * game_size] = '🟦'
+                    game[place + l * game_size] = texture[18]
                     l += 1
 
         game[(game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size] = '🙂'
         place = (game_size**2 - int(np.ceil(game_size/2))) - (ytm + 1) * game_size
     touching_ground = True
     if gamemode.upper() == 'SKYWARS':
-        game[420:427] = '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[420:427] = texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0]
 
         game[400] = '🙂'
-        game[315:319] = '🟩', '🟩', '🟩', '🟩'
+        game[315:319] = texture[0], texture[0], texture[0], texture[0]
 
-        game[339] = '🟩'
+        game[339] = texture[0]
 
-        game[360] = '🟩'
+        game[360] = texture[0]
 
-        game[119:126] = '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[119:126] = texture[0], texture[0], texture[0], texture[0], texture[0], texture[0]
 
         game[103] = '☹️ '
-        game[17:21] = '🟩', '🟩', '🟩', '🟩'
+        game[17:21] = texture[0], texture[0], texture[0], texture[0]
 
-        game[38] = '🟩'
+        game[38] = texture[0]
 
-        game[59] = '🟩'
+        game[59] = texture[0]
 
         place = 400
     if gamemode.upper() == 'PARKOUR':
         game[399] = '🙂'
-        game[420] = '🟩'
+        game[420] = texture[0]
 
-        game[422] = '🟩'
+        game[422] = texture[0]
 
-        game[424] = '🟩'
+        game[424] = texture[0]
 
-        game[406] = '🟩'
+        game[406] = texture[0]
 
-        game[431] = '🟩'
+        game[431] = texture[0]
 
-        game[390] = '🟩'
+        game[390] = texture[0]
 
-        game[348] = '🟩'
+        game[348] = texture[0]
 
-        game[437] = '🟩'
+        game[437] = texture[0]
 
-        game[398] = '🟩'
+        game[398] = texture[0]
 
-        game[285] = '🟩'
+        game[285] = texture[0]
 
-        game[353] = '🟩'
+        game[353] = texture[0]
 
-        game[311] = '🟩'
+        game[311] = texture[0]
 
-        game[269] = '🟩'
+        game[269] = texture[0]
 
-        game[260] = '🟩'
+        game[260] = texture[0]
 
-        game[218] = '🟩'
+        game[218] = texture[0]
 
-        game[176] = '🟩'
+        game[176] = texture[0]
 
-        game[254] = '🟩'
+        game[254] = texture[0]
 
-        game[210] = '🟩'
+        game[210] = texture[0]
 
-        game[170] = '🟩'
+        game[170] = texture[0]
 
-        game[129] = '🟩'
+        game[129] = texture[0]
 
-        game[85:88] = '🟩', '🟩', '🟩'
+        game[85:88] = texture[0], texture[0], texture[0]
 
-        game[126] = '🟩'
+        game[126] = texture[0]
 
-        game[91] = '🟩'
+        game[91] = texture[0]
 
-        game[95] = '🟩'
+        game[95] = texture[0]
 
-        game[99] = '🟩'
+        game[99] = texture[0]
 
-        game[103] = '🟩'
+        game[103] = texture[0]
 
         game[82] = '🏁'
         place = 399
@@ -734,67 +734,67 @@ def entire_game(player_name):
         block_count[0] = 0
         block_count[1] = 5
         block_count[16] = 0
-        game[420:430] = '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[420:430] = texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[399] = '🪵 '
+        game[399] = texture[1]
 
-        game[378] = '🪵 '
+        game[378] = texture[1]
 
-        game[357] = '🪵 '
+        game[357] = texture[1]
 
-        game[336] = '🪵 '
+        game[336] = texture[1]
 
-        game[315:319] = '🪵 ', '🪵 ', '🪵 ', '🪵 '
+        game[315:319] = texture[1], texture[1], texture[1], texture[1]
 
-        game[340] = '🪵 '
+        game[340] = texture[1]
 
-        game[294:299] = '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[294:299] = texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[319] = '🟩'
+        game[319] = texture[0]
 
-        game[406] = '🪨 '
+        game[406] = texture[3]
 
         barrier = []
         m = 0
         while m < 105:
-            barrier.append('🟩')
+            barrier.append(texture[0])
             m += 1
         game[168:273] = barrier
-        game[437:440] = '🪵 ', '🪵 ', '🪵 '
+        game[437:440] = texture[1], texture[1], texture[1]
 
-        game[415:420] = '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[415:420] = texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[398] = '🪵 '
+        game[398] = texture[1]
 
-        game[394] = '🪵 '
+        game[394] = texture[1]
 
-        game[437 - 294:440 - 294] = '🪵 ', '🪵 ', '🪵 '
+        game[437 - 294:440 - 294] = texture[1], texture[1], texture[1]
 
-        game[415 - 294:420 - 294] = '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[415 - 294:420 - 294] = texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[398 - 294] = '🪵 '
+        game[398 - 294] = texture[1]
 
-        game[394 - 294] = '🪵 '
+        game[394 - 294] = texture[1]
 
-        game[420 - 294:430 - 294] = '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[420 - 294:430 - 294] = texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[399 - 294] = '🪵 '
+        game[399 - 294] = texture[1]
 
-        game[378 - 294] = '🪵 '
+        game[378 - 294] = texture[1]
 
-        game[357 - 294] = '🪵 '
+        game[357 - 294] = texture[1]
 
-        game[336 - 294] = '🪵 '
+        game[336 - 294] = texture[1]
 
-        game[315 - 294:319 - 294] = '🪵 ', '🪵 ', '🪵 ', '🪵 '
+        game[315 - 294:319 - 294] = texture[1], texture[1], texture[1], texture[1]
 
-        game[340 - 294] = '🪵 '
+        game[340 - 294] = texture[1]
 
-        game[294 - 294:299 - 294] = '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[294 - 294:299 - 294] = texture[0], texture[0], texture[0], texture[0], texture[0]
 
-        game[319 - 294] = '🟩'
+        game[319 - 294] = texture[0]
 
-        game[406 - 294] = '🪨 '
+        game[406 - 294] = texture[3]
 
         game[401] = '🙂'
         place = 401
@@ -856,71 +856,71 @@ def entire_game(player_name):
         game_size = 51
         place = 2504
         game[2503] = '🙂'
-        game[2551:2558] = '🟨', '🟨', '🟨', '🟨', '🟨', '🟨', '🟨'
+        game[2551:2558] = texture[4], texture[4], texture[4], texture[4], texture[4], texture[4], texture[4]
 
         game[2296], game[2302], game[2347], game[2353], game[2398], game[2404], game[2449], game[2455], game[2500] = \
-            '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 '
+            texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1]
 
-        game[2558:2565] = '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'
+        game[2558:2565] = texture[0], texture[0], texture[0], texture[0], texture[0], texture[0], texture[0]
 
         game[2245:2252] = game[2551:2558]
-        game[2501:2503] = '🪨 ', '🪨 '
+        game[2501:2503] = texture[3], texture[3]
 
-        game[2504] = '📦'
+        game[2504] = texture[5]
 
-        game[2509:2512] = '💎', '💎', '💎'
+        game[2509:2512] = texture[9], texture[9], texture[9]
 
-        game[2459] = '💎'
+        game[2459] = texture[9]
 
-        game[2456] = '💎'
+        game[2456] = texture[9]
 
-        game[2354] = '💎'
+        game[2354] = texture[9]
 
-        game[2196:2200] = '🪙 ', '🪙 ', '🪙 ', '🪙 ', '🪙 '
+        game[2196:2200] = texture[8], texture[8], texture[8], texture[8], texture[8]
 
-        game[2146:2149] = '🪙 ', '🪙 ', '🪙 '
+        game[2146:2149] = texture[8], texture[8], texture[8]
 
-        game[2096] = '🪙 '
+        game[2096] = texture[8]
 
         game[2592:2599] = game[2552:2559]
         game[2585:2592] = game[2559:2566]
         game[2286:2293] = game[2246:2253]
         game[2236:2241] = game[2196:2201]
         game[2186:2189] = game[2146:2149]
-        game[2136] = '🪙 '
+        game[2136] = texture[8]
 
         game[2337], game[2343], game[2388], game[2394], game[2439], game[2445], game[2490], game[2496], game[2547] = \
-            '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 ', '🪵 '
+            texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1], texture[1]
 
-        game[2545:2547] = '🪨 ', '🪨 '
+        game[2545:2547] = texture[3], texture[3]
 
         game[2544] = '☹️ '
         game[2536:2539] = game[2510:2513]
-        game[2543] = '📦'
+        game[2543] = texture[5]
 
-        game[2486] = '💎'
+        game[2486] = texture[9]
 
-        game[2489] = '💎'
+        game[2489] = texture[9]
 
-        game[2387] = '💎'
+        game[2387] = texture[9]
 
         game[104], game[106], game[155], game[157], game[207], game[258], game[309] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
         game[109], game[159], game[161], game[210], game[212], game[261], game[263], game[313] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
         game[112], game[114], game[163], game[165], game[214], game[216], game[265], game[267], game[316], game[317], game[318] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
         game[717], game[718], game[767], game[818], game[869], game[921], game[922] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
         game[720], game[721], game[771], game[773], game[822], game[823], game[873], game[924] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
         game[724], game[726], game[775], game[777], game[826], game[828], game[877], game[879], game[928], game[929], game[930] = \
-            '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎', '💎'
+            texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9], texture[9]
 
     x_pos = (place % (game_size**2)) % game_size - int(np.floor(game_size/2))  # Coordinate converter
     y_pos = -1 * ((place % (game_size**2)) // game_size) + int(np.floor(game_size/2))
@@ -1134,10 +1134,10 @@ def entire_game(player_name):
                         for i in range(len(block_count)):
                             if block_types[i] == game[place_break]:
                                 block_count[i] += block_multiplier
-                                if game[place_break] == '🥬'and random.randint(1, 6) == 1:
+                                if game[place_break] == texture[2]and random.randint(1, 6) == 1:
                                     block_count[2] -= block_multiplier
                                     Saplings += block_multiplier
-                                if game[place_break] == '📦':
+                                if game[place_break] == texture[5]:
                                     for j in range(len(block_count)):
                                         block_count[j] += chest_items[place_break][j]
                                     Saplings += chest_items[place_break][len(block_count) + 0]
@@ -1148,7 +1148,7 @@ def entire_game(player_name):
                                     BlockBreakFortuneI += chest_items[place_break][len(block_count) + 5]
                                     fireballs += chest_items[place_break][len(block_count) + 6]
                                     del chest_items[place_break]
-                                if game[place_break] == '❓':
+                                if game[place_break] == texture[15]:
                                     lucky_block = True
                                 game[place_break] = '  '
                                 break
@@ -1176,17 +1176,17 @@ def entire_game(player_name):
                                 game[place_break] = block_types[i]
                                 if block.upper() == 'WATER':
                                     if place_break + game_size < game_size ** 2:
-                                        if game[place_break + game_size] == '🔥':
-                                            game[place_break + game_size] = '🪨 '
+                                        if game[place_break + game_size] == texture[17]:
+                                            game[place_break + game_size] = texture[3]
                                     if place_break + 1 < game_size ** 2:
-                                        if game[place_break + 1] == '🔥':
-                                            game[place_break + 1] = '🪨 '
+                                        if game[place_break + 1] == texture[17]:
+                                            game[place_break + 1] = texture[3]
                                     if place_break - 1 >= 0:
-                                        if game[place_break - 1] == '🔥':
-                                            game[place_break - 1] = '🪨 '
+                                        if game[place_break - 1] == texture[17]:
+                                            game[place_break - 1] = texture[3]
                                     if place_break - game_size >= 0:
-                                        if game[place_break - game_size] == '🔥':
-                                            game[place_break - game_size] = '🪨 '
+                                        if game[place_break - game_size] == texture[17]:
+                                            game[place_break - game_size] = texture[3]
                                 if block.upper() == 'CHESTS':
                                     chest_items[place_break] = []
                                     for i in range(len(block_count)):
@@ -1215,55 +1215,55 @@ def entire_game(player_name):
                                     chest_items[place_break].append(0)  # Fireballs
                                 if block.upper() == 'WATER':
                                     if place_break + game_size < game_size ** 2:
-                                        if game[place_break + game_size] == '🔥':
-                                            game[place_break + game_size] = '🪨 '
+                                        if game[place_break + game_size] == texture[17]:
+                                            game[place_break + game_size] = texture[3]
                                     if place_break + 1 < game_size ** 2:
-                                        if game[place_break + 1] == '🔥':
-                                            game[place_break + 1] = '🪨 '
+                                        if game[place_break + 1] == texture[17]:
+                                            game[place_break + 1] = texture[3]
                                     if place_break - 1 >= 0:
-                                        if game[place_break - 1] == '🔥':
-                                            game[place_break - 1] = '🪨 '
+                                        if game[place_break - 1] == texture[17]:
+                                            game[place_break - 1] = texture[3]
                                     if place_break - game_size >= 0:
-                                        if game[place_break - game_size] == '🔥':
-                                            game[place_break - game_size] = '🪨 '
+                                        if game[place_break - game_size] == texture[17]:
+                                            game[place_break - game_size] = texture[3]
                                     if place_break + game_size < game_size ** 2:
-                                        if game[place_break + game_size] == '🟧':
-                                            game[place_break + game_size] = '🌑'
+                                        if game[place_break + game_size] == texture[20]:
+                                            game[place_break + game_size] = texture[21]
                                     if place_break + 1 < game_size ** 2:
-                                        if game[place_break + 1] == '🟧':
-                                            game[place_break + 1] = '🌑'
+                                        if game[place_break + 1] == texture[20]:
+                                            game[place_break + 1] = texture[21]
                                     if place_break - 1 >= 0:
-                                        if game[place_break - 1] == '🟧':
-                                            game[place_break - 1] = '🌑'
+                                        if game[place_break - 1] == texture[20]:
+                                            game[place_break - 1] = texture[21]
                                     if place_break - game_size >= 0:
-                                        if game[place_break - game_size] == '🟧':
-                                            game[place_break - game_size] = '🌑'
+                                        if game[place_break - game_size] == texture[20]:
+                                            game[place_break - game_size] = texture[21]
                                 if block.upper() == 'MAGMA':
                                     if place_break + game_size < game_size ** 2:
-                                        if game[place_break + game_size] == '🟦':
-                                            game[place_break] = '🪨 '
+                                        if game[place_break + game_size] == texture[18]:
+                                            game[place_break] = texture[3]
                                     if place_break + 1 < game_size ** 2:
-                                        if game[place_break + 1] == '🟦':
-                                            game[place_break] = '🪨 '
+                                        if game[place_break + 1] == texture[18]:
+                                            game[place_break] = texture[3]
                                     if place_break - 1 >= 0:
-                                        if game[place_break - 1] == '🟦':
-                                            game[place_break] = '🪨 '
+                                        if game[place_break - 1] == texture[18]:
+                                            game[place_break] = texture[3]
                                     if place_break - game_size >= 0:
-                                        if game[place_break - game_size] == '🟦':
-                                            game[place_break] = '🪨 '
+                                        if game[place_break - game_size] == texture[18]:
+                                            game[place_break] = texture[3]
                                 if block.upper() == 'LAVA':
                                     if place_break + game_size < game_size ** 2:
-                                        if game[place_break + game_size] == '🟦':
-                                            game[place_break + game_size] = '🪨 '
+                                        if game[place_break + game_size] == texture[18]:
+                                            game[place_break + game_size] = texture[3]
                                     if place_break + 1 < game_size ** 2:
-                                        if game[place_break + 1] == '🟦':
-                                            game[place_break + 1] = '🪨 '
+                                        if game[place_break + 1] == texture[18]:
+                                            game[place_break + 1] = texture[3]
                                     if place_break - 1 >= 0:
-                                        if game[place_break - 1] == '🟦':
-                                            game[place_break - 1] = '🪨 '
+                                        if game[place_break - 1] == texture[18]:
+                                            game[place_break - 1] = texture[3]
                                     if place_break - game_size >= 0:
-                                        if game[place_break - game_size] == '🟦':
-                                            game[place_break - game_size] = '🪨 '                                    
+                                        if game[place_break - game_size] == texture[18]:
+                                            game[place_break - game_size] = texture[3]                                    
                     if block.upper() == 'SAPLINGS':
                         if gamemode == 'creative':
                             spawn_tree(int(x), int(y) + (int(np.ceil(game_size/2))-2))
@@ -1343,7 +1343,7 @@ def entire_game(player_name):
             try:
                 place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(
                     np.floor(game_size / 2))
-                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '🎰':
+                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == texture[16]:
                     lottery()
             except ValueError:
                 pass
@@ -1589,7 +1589,7 @@ def entire_game(player_name):
             y = input('y? ')
             try:
                 place_break = (int(y) - int(np.floor(game_size / 2))) * -game_size + int(x) + int(np.floor(game_size / 2))
-                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '💣':
+                if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == texture[14]:
                     vel_change = explode_tnt(int(x), int(y) + (int(np.ceil(game_size / 2)) - 1), tnt_explosion_range, 1)
                     right_speed += vel_change[0]
                     up_speed += vel_change[1]
@@ -1670,20 +1670,20 @@ def entire_game(player_name):
                     place -= game_size
                     if gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' and (game[place + game_size]):
                         hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
-                        if game[place + game_size] == '🟦':
+                        if game[place + game_size] == texture[18]:
                             hp -= np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
                             burn_time = 0
-                        if game[place + game_size] == '🟢':
+                        if game[place + game_size] == texture[19]:
                             hp -= np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
                     break
                 i += 1
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place + game_size < game_size ** 2:
                 if block_types.__contains__(game[place + game_size]) and (game[place + game_size]):
                     hp += np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
-                    if game[place + game_size] == '🟦':
+                    if game[place + game_size] == texture[18]:
                         hp -= np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
                         burn_time = 0
-                    if game[place + game_size] == '🟢':
+                    if game[place + game_size] == texture[19]:
                         hp -= np.ceil((int(np.ceil(up_speed + 0.1)) * -(int(np.ceil(up_speed + 0.1)) - 1)) / 2)
         if right_speed > 0 and gamemode != 'creative':
             i = 0
@@ -1718,23 +1718,23 @@ def entire_game(player_name):
 
         if player_jump_invert is False or player_global_gravity >= 0:
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place + game_size < game_size ** 2:
-                if game[place + game_size] == '🔥':
+                if game[place + game_size] == texture[17]:
                     burn_time = 3
-                if game[place + game_size] == '🟧':
+                if game[place + game_size] == texture[20]:
                     burn_time = 6
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful') and place + game_size < game_size ** 2:
-                if game[place + game_size] == '🔃':
+                if game[place + game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
                 hp -= 2
         else:
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place - game_size >= 0:
-                if game[place - game_size] == '🔥':
+                if game[place - game_size] == texture[17]:
                     burn_time = 3
-                if game[place - game_size] == '🟧':
+                if game[place - game_size] == texture[20]:
                     burn_time = 6
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful') and place - game_size >= 0:
-                if game[place - game_size] == '🔃':
+                if game[place - game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
                 hp -= 2            
@@ -1838,11 +1838,11 @@ def entire_game(player_name):
             G1 += 1
             G2 += 1
         if gamemode == 'bedwars' and Your_Bed is True:
-            if game[406] != '🪨 ':
+            if game[406] != texture[3]:
                 Your_Bed = False
                 chat.append('Your bed was destroyed. You will no longer respawn.')
         if gamemode == 'bedwars' and Enemy_Bed is True:
-            if game[406-294] != '🪨 ':
+            if game[406-294] != texture[3]:
                 Enemy_Bed = False
                 chat.append(f"{enemy_name}'s bed was destroyed. They will no longer respawn.")
         if gamemode == 'bedwars' and Enemy_Bed is True and place != 401-294:
@@ -1894,13 +1894,13 @@ def entire_game(player_name):
         """
 
     print('Process finished with exit code 69420')  # Fake ending message
-    return username
+    return [username, texture]
 
-
-global_username = entire_game(0)
+texture_pack = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃']
+global_username, texture_pack = entire_game(0, texture_pack)
 while True:
     if ['YES', 'Y'].__contains__(input('\nDo you want to play again? (Y/N) ').upper()):
-        global_username = entire_game(global_username)
+        global_username, texture_pack = entire_game(global_username, texture_pack)
     else:
         break
 print('Thanks for playing!')
