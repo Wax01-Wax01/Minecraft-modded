@@ -1,5 +1,7 @@
 # The Hardest Items To Obtain [TOP *🔟*] (According to Wax01-Wax01)
 
+## V 5.3:
+
 ## TOP 🥇: Explosive Pickaxe (Fortune I)
 ### This item requires an explosive pickaxe, and 3 lotteries. 3 lotteries is no joke as of now!
 ## TOP 🥈: Block Break (Fortune I)
