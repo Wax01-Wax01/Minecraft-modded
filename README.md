@@ -1,5 +1,5 @@
 # Minecraft-modded
- ## Minecraft modded V5️⃣.3️⃣.1️⃣
+ ## Minecraft modded V6️⃣.0️⃣.2️⃣
 
  [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
