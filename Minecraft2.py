@@ -7,7 +7,17 @@ import numpy as np
 
 
 # Entire game function
+<<<<<<< Updated upstream
 def entire_game(player_name):
+=======
+def entire_game(player_name, texture):
+    if ['YES', 'Y'].__contains__(input('Do you want to change your texture pack? (Y/N) ').upper()):
+        texture_name = input('Choose a texture pack: V5.3, V6.0 VS Code >? ')
+        if texture_name.upper() == 'V5.3':
+            texture = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7', '#', 'W', 'S', 'L', 'O', 'I', 'M', ' ']
+        if texture_name.upper() == 'V6.0 VS CODE':
+            texture = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '  ']
+>>>>>>> Stashed changes
     Time_Spent = 0
     game_size = 21
     vill_houses = {}  # List of villages
@@ -308,6 +318,7 @@ def entire_game(player_name):
         chest_items[place - game_size - 1][9] = random.randint(0, 2)
         chest_items[place - game_size - 1][15] = random.randint(2, 4)
         chest_items[place - game_size - 1][16] = random.randint(1, 2)
+        chest_items[place - game_size - 1][23] = random.randint(0, 2)
         x_block_place = -3
         for block_col in range(7):
             block_place = place + x_block_place + game_size
@@ -454,9 +465,15 @@ def entire_game(player_name):
     BlockBreakFortuneI = 0
     fireballs = 100
     # VS Code Texture Pack (Wood, Stone, and have an extra space to align the columns):
+<<<<<<< Updated upstream
     block_types = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃']
     block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100]
+=======
+    block_types = [texture[0], texture[1], texture[2], texture[3], texture[4], texture[5], texture[6], texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[14], texture[15], texture[16], texture[17], texture[18], texture[19], texture[20], texture[21], texture[22], texture[23]]
+    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS', 'MOONSTONE']
+    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100, 0]
+>>>>>>> Stashed changes
     entities = []
     entity_actions = []
     entity_up_speed = []
@@ -586,6 +603,9 @@ def entire_game(player_name):
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
                         game[place] = '💎'
+
+                    if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
+                        game[place] = texture[23]
 
                 else:
                     game[place] = '🟩'
@@ -1167,9 +1187,9 @@ def entire_game(player_name):
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == '  ':
                     if gamemode == 'bedwars':
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone? ')
                     else:
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries or magma? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone? ')
                     for i in range(len(block_count)):
                         if block.upper() == block_names[i]:
                             if gamemode == 'creative':
@@ -1328,7 +1348,7 @@ def entire_game(player_name):
                     pass
             if Your_Server and chat_message.upper() == f'{username.upper()}: //FILL  ':
                 try:
-                    block_world_edit = input('Fill with grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds \nor upright stairs or upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or air? ')
+                    block_world_edit = input('Fill with grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds \nor upright stairs or upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone or air? ')
                     if block_world_edit.upper() == 'AIR':
                         world_edit_fill(pos1[0], pos2[0], pos1[1], pos2[1], '  ')
                     elif block_names.__contains__(block_world_edit.upper()):
@@ -1896,8 +1916,13 @@ def entire_game(player_name):
     print('Process finished with exit code 69420')  # Fake ending message
     return username
 
+<<<<<<< Updated upstream
 
 global_username = entire_game(0)
+=======
+texture_pack = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '  ']
+global_username, texture_pack = entire_game(0, texture_pack)
+>>>>>>> Stashed changes
 while True:
     if ['YES', 'Y'].__contains__(input('\nDo you want to play again? (Y/N) ').upper()):
         global_username = entire_game(global_username)
