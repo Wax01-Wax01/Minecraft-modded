@@ -2,6 +2,21 @@
 
 ## Welcome to Minecraft-modded! 
 
+### 3/19/2025: Moonstone! 🌙
+### ( liyongwang2018 )
+### ( V6️⃣.0️⃣.2️⃣ )
+**Moonstone has been added! Which ore is going to join the chat next? ☀️⭐❤️🩷**
+
+### 3/17/2025: You can change your texture pack now! 🟦↔️W
+### ( Wax01-Wax01 & liyongwang2018 )
+### ( V6️⃣.0️⃣.1️⃣ )
+**You can change your texture pack back to the V5.3 texture pack!**
+
+### 3/16/2025: New Texture Pack! 📦
+### ( Wax01-Wax01 & liyongwang2018 )
+### ( V6️⃣.0️⃣ )
+**V6 is out with a completely new design, and new blocks and mechanics, mobs have been added!**
+
 ### 8/26/2024: Buffed Lucky Blocks! 🍀💪
 **Lucky Blocks produce up to 5 random blocks now. WAY more OP!**
 
