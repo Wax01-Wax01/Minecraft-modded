@@ -1,5 +1,5 @@
 # Minecraft-modded
- ## Minecraft modded V6️⃣.0️⃣.2️⃣
+ ## Minecraft modded V6️⃣.1️⃣
 
  [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -7,7 +7,7 @@
 
 - # Features
   - ## 2️⃣4️⃣ different types of visible blocks
-  - ## 1️⃣0️⃣ gamemodes
+  - ## 1️⃣1️⃣ gamemodes
     - ### What is a gamemode? A gamemode is a mode in the game.
   - ## Customizable Game Size
   - ## 1️⃣4️⃣ commands
