@@ -481,6 +481,7 @@ def entire_game(player_name, texture):
     burn_time = 0
     pos1 = [0, 0]
     pos2 = [0, 0]
+    last_pos = 0 # red light green light
 
     # Parameters
 
@@ -548,6 +549,24 @@ def entire_game(player_name, texture):
         game.append(texture[-1])
         i += 1
     i = 0
+    if ['RLGL', 'RED LIGHT GREEN LIGHT'].__contains__(gamemode.upper()):
+        gamemode = 'red light green light'
+        game_size = 31
+        while i <= game_size**2:
+            game.append(texture[-1])
+            i += 1
+        i = 0
+        for location in range(961):
+            if location < 31 or location >= 930:
+                if random.randint(1, 4) == 1:
+                    game[location] = texture[22]
+                else:
+                    game[location] = texture[0]
+            else:
+                if random.randint(1, 9) == 1:
+                    game[location] = texture[1]
+        place = 899
+        game[899] = '🙂'
     if gamemode.upper() == 'PEACEFUL' or gamemode.upper() == 'CREATIVE' or gamemode.upper() == 'EXPLOSION SURVIVAL' or gamemode.upper() == 'SURVIVAL' or gamemode.upper() == 'HARD SURVIVAL' or gamemode.upper() == 'PIGTEST' :
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             game_size = 41
@@ -1732,7 +1751,7 @@ def entire_game(player_name, texture):
                     burn_time = 3
                 if game[place + game_size] == texture[20]:
                     burn_time = 6
-            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful') and place + game_size < game_size ** 2:
+            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful' or gamemode == 'red light green light') and place + game_size < game_size ** 2:
                 if game[place + game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
@@ -1743,7 +1762,7 @@ def entire_game(player_name, texture):
                     burn_time = 3
                 if game[place - game_size] == texture[20]:
                     burn_time = 6
-            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful') and place - game_size >= 0:
+            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful' or gamemode == 'red light green light') and place - game_size >= 0:
                 if game[place - game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
@@ -1891,6 +1910,31 @@ def entire_game(player_name, texture):
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and hp <= 0:
             print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')
             break
+        if gamemode == 'red light green light':
+            if Time_Spent % 20 == 7:
+                chat.append('Server: 3')
+            if Time_Spent % 20 == 8:
+                chat.append('Server: 2')
+            if Time_Spent % 20 == 9:
+                chat.append('Server: 1')
+            if Time_Spent % 20 == 10:
+                chat.append('Server: RED LIGHT!!!')
+                last_pos = place
+            if Time_Spent % 20 > 10 and place != last_pos:
+                print(f'You died, you moved during red light! You survived {Time_Spent} seconds!')
+                break
+            if Time_Spent % 20 == 17:
+                chat.append('Server: 3')
+            if Time_Spent % 20 == 18:
+                chat.append('Server: 2')
+            if Time_Spent % 20 == 19:
+                chat.append('Server: 1')
+            if Time_Spent % 20 == 0:
+                chat.append('Server: GREEN LIGHT!!!')
+            if place % 31 == 30:
+                print(f'You win!!! It took you {Time_Spent} seconds!')
+                break
+        
 
         game[place] = '🙂'
 
