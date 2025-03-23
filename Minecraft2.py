@@ -434,7 +434,7 @@ def entire_game(player_name, texture):
     login()
     print(f'Hello {username}!')
     Server = int(np.round(10 ** random.uniform(0, 10)))
-    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative or explosion survival or \nsurvival or hard survival? ')  # Gamemode to play
+    gamemode = input('Do u want 2 play peaceful or skywars or parkour or make a server (mas) or bedwars or rock paper scissors (rps) or creative or explosion survival or \nsurvival or hard survival or red light green light (rlgl)? ')  # Gamemode to play
     if gamemode.upper() == 'MAS' or gamemode.upper() == 'MAKE A SERVER':
         Your_Server = True
         gamemode = 'peaceful'

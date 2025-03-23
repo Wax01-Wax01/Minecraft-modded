@@ -210,3 +210,5 @@ k = 0
 while k < 21:
     print(map_easy_2[k * 21: (k + 1) * 21])
     k += 1
+
+print('a'.__contains__('randomuser'))
