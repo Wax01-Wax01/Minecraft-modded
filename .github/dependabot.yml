@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: "pip" # See documentation for possible values
     directory: "/usr/lib/python3.8/site-packages/numpy/__init__.py" # Location of package manifests
     schedule:
       interval: "daily"
