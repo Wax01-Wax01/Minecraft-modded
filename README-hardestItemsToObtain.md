@@ -23,3 +23,26 @@
 ## TOP 🔟: Sapling
 ### Who grinds for this? It's a 1 in 6 drop. Not very easy if you're normally unlucky and impatient.
 # Congrats if you made it this far! 💎🎉🚀🌟
+
+## V 6.2:
+
+## TOP 🥇: Explosive Pickaxe (Fortune I)
+### Still the #1!
+## TOP 🥈 Sunstone/Starstone/Regen Stone/Healing Stone ☀️⭐❤️🩷:
+### Dig straight down.
+## TOP 🥉: Block Break (Fortune I)
+### Uses lotteries!
+## TOP 4️⃣: Lottery 🎰 (>= 2)
+### Lotteries aren't very easy to get. No wonder how the top 2 need lotteries to make!
+## TOP 5️⃣: Diamond/Moonstone 💎🌙
+### Same tip as #2: DIG STRAIGHT DOWN!!!
+## TOP 6️⃣: Gold 🪙
+### Why?
+## TOP 7️⃣: Flint and Steel:
+### 💣 -> 💥
+## TOP 8️⃣: Lucky Block ❓
+### Get stone. (my brothers: ❔[buffed]❗[puts in inventory]❕[buffed version of❗]⁉️[buffed version of ❕and❔])
+## TOP 9️⃣: Magma 
+### Do what's said above ^^^, also get this -> 🔲, not rare in hard survival tho
+## TOP 🔟: Flint
+### How much stone? 2 less than what's above ^^^
