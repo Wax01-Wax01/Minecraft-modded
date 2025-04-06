@@ -315,6 +315,10 @@ def entire_game(player_name, texture):
         chest_items[place - game_size - 1][15] = random.randint(2, 4)
         chest_items[place - game_size - 1][16] = random.randint(1, 2)
         chest_items[place - game_size - 1][23] = random.randint(0, 2)
+        chest_items[place - game_size - 1][24] = random.randint(0, 1)
+        chest_items[place - game_size - 1][25] = random.randint(0, 1)
+        chest_items[place - game_size - 1][26] = random.randint(0, 1)
+        chest_items[place - game_size - 1][27] = random.randint(0, 1)
         x_block_place = -3
         for block_col in range(7):
             block_place = place + x_block_place + game_size
@@ -462,7 +466,7 @@ def entire_game(player_name, texture):
     fireballs = 100
     # VS Code Texture Pack (Wood, Stone, and have an extra space to align the columns):
     block_types = [texture[0], texture[1], texture[2], texture[3], texture[4], texture[5], texture[6], texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[14], texture[15], texture[16], texture[17], texture[18], texture[19], texture[20], texture[21], texture[22], texture[23], texture[24], texture[25], texture[26], texture[27]]
-    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS', 'MOONSTONE', 'SUNSTONE', 'STARSTONE', 'REGEN STONE', 'HEALING STONE']
+    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS', 'MOONSTONE', 'SUNSTONE', 'STARSTONE', 'REGEN STONES', 'HEALING STONES']
     block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0]
     entities = []
     entity_actions = []
@@ -482,6 +486,10 @@ def entire_game(player_name, texture):
     pos1 = [0, 0]
     pos2 = [0, 0]
     last_pos = 0 # red light green light
+    heat_resistance = 0
+    luck = 0
+    regen = 0
+    world_type = 'normal' # normal, amplified
 
     # Parameters
 
@@ -572,6 +580,12 @@ def entire_game(player_name, texture):
             game_size = 41
         else:
             game_size = int(input('How big do u want ur world 2 b??? '))
+        if ['Y', 'YES'].__contains__(input('Do you want to change the world type? (Y/N) ').upper()):
+            world_type_test = input('What do you want the world type to be? Normal or Amplified? ').lower()
+            if world_type_test == 'normal':
+                world_type = 'normal'
+            if world_type_test == 'amplified':
+                world_type = 'amplified'
         y_terrain = int(np.floor(game_size/2))
         h20_terrain = int(np.floor(game_size/2))
         game = []  # World Terrain Generator
@@ -583,18 +597,36 @@ def entire_game(player_name, texture):
             super_slope = random.randint(0, 1)
             if super_slope == 0:
                 if y_terrain > int(np.ceil((game_size * 5)/7)):
-                    y_terrain += random.randint(-1, 0)
+                    if world_type != 'amplified':
+                        y_terrain += random.randint(-1, 0)
+                    else:
+                        y_terrain += random.randint(-3, 0)
                 elif y_terrain < int(np.floor((game_size * 2)/7)-1):
-                    y_terrain += random.randint(0, 1)
+                    if world_type != 'amplified':    
+                        y_terrain += random.randint(0, 1)
+                    else:
+                        y_terrain += random.randint(0, 3)
                 else:
-                    y_terrain += random.randint(-1, 1)
+                    if world_type != 'amplified':    
+                        y_terrain += random.randint(-1, 1)
+                    else:    
+                        y_terrain += random.randint(-3, 3)
             else:
                 if y_terrain > int(np.ceil((game_size * 5)/7)):
-                    y_terrain += random.randint(-2, 0)
+                    if world_type != 'amplified':    
+                        y_terrain += random.randint(-2, 0)
+                    else:
+                        y_terrain += random.randint(-6, 0)
                 elif y_terrain < int(np.floor((game_size * 2)/7)-1):
-                    y_terrain += random.randint(0, 2)
+                    if world_type != 'amplified':    
+                        y_terrain += random.randint(0, 2)
+                    else:
+                        y_terrain += random.randint(0, 6)
                 else:
-                    y_terrain += random.randint(-2, 2)
+                    if world_type != 'amplified':
+                        y_terrain += random.randint(-2, 2)
+                    else:
+                        y_terrain += random.randint(-6, 6)
             j = y_terrain
             place = game_size * (game_size-1) + i - y_terrain * game_size
             while j >= 0:
@@ -1073,6 +1105,8 @@ def entire_game(player_name, texture):
                     up_speed = 0
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and hp < 20:  # Regeneration of health
             hp += 1
+            if regen > 0:
+                hp += 1
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
             burn_time -= 1
 
@@ -1082,8 +1116,7 @@ def entire_game(player_name, texture):
         while k < game_size:
             print(game[k * game_size: (k + 1) * game_size])
             k += 1
-        if burn_time > 0:
-            print(f'🔥 {burn_time}')
+        print(f'🔥 {burn_time}, ☀️  {heat_resistance}, 🍀 {luck}, ❤️  {regen}')
         summary = 'Inventory: '
         for index in range(len(block_count)):
             summary += f'{block_count[index]} {block_names[index].lower()}, '
@@ -1194,10 +1227,16 @@ def entire_game(player_name, texture):
                                 break
                         if lucky_block:
                             block_count[15] -= block_multiplier
-                            for offset in explosive_pick_range:
-                                if 0 <= place_break + offset < game_size ** 2:
-                                    if game[place_break + offset] == texture[-1]:
-                                        game[place_break + offset] = random.choice(block_types)
+                            if luck <= 0:
+                                for offset in explosive_pick_range:
+                                    if 0 <= place_break + offset < game_size ** 2:
+                                        if game[place_break + offset] == texture[-1]:
+                                            game[place_break + offset] = random.choice(block_types)
+                            else:
+                                for offset in fireball_explosion_range:
+                                    if 0 <= place_break + offset < game_size ** 2:
+                                        if game[place_break + offset] == texture[-1]:
+                                            game[place_break + offset] = random.choice(block_types)
             except ValueError:
                 pass
         elif (move.upper() == 'PAB' or move.upper() == 'PLACE A BLOCK') and gamemode != 'rock paper scissors' and gamemode != 'explosion survival':
@@ -1207,9 +1246,9 @@ def entire_game(player_name, texture):
                 place_break = (int(y) - int(np.floor(game_size/2))) * -game_size + int(x) + int(np.floor(game_size/2))
                 if ((int(x_pos) - int(x)) ** 2 + (int(y_pos) - int(y)) ** 2) ** 0.5 < 2.9 and game[place_break] == texture[-1]:
                     if gamemode == 'bedwars':
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone or sunstone or starstone or regen stones or healing stones? ')
                     else:
-                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone? ')
+                        block = input('Do you want to place grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds or upright stairs \nor upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or lotteries or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone or sunstone or starstone or regen stones or healing stones? ')
                     for i in range(len(block_count)):
                         if block.upper() == block_names[i]:
                             if gamemode == 'creative':
@@ -1368,7 +1407,7 @@ def entire_game(player_name, texture):
                     pass
             if Your_Server and chat_message.upper() == f'{username.upper()}: //FILL  ':
                 try:
-                    block_world_edit = input('Fill with grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds \nor upright stairs or upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone or air? ')
+                    block_world_edit = input('Fill with grass or wood or leaves or saplings or stone or planks or chests or coal or iron or gold or diamonds \nor upright stairs or upleft stairs or downright stairs or downleft stairs or tnt or lucky blocks or magma or water or slime blocks or lava or \nobsidian or inverters or moonstone or sunstone or starstone or regen stones or healing stones or air? ')
                     if block_world_edit.upper() == 'AIR':
                         world_edit_fill(pos1[0], pos2[0], pos1[1], pos2[1], texture[-1])
                     elif block_names.__contains__(block_world_edit.upper()):
@@ -1639,7 +1678,7 @@ def entire_game(player_name, texture):
         elif move.upper() == 'QUIT':
             break
         elif ['EEP', 'TAE', 'TOGGLE AN EFFECT'].__contains__(move.upper()):
-            print('1. Explosive Pickaxe (No Buffs) \n2. Explosive Pickaxe (Fortune I) \n3. Block Break (Fortune I)')
+            print('1. Explosive Pickaxe (No Buffs) \n2. Explosive Pickaxe (Fortune I) \n3. Block Break (Fortune I) \n4. Heat Resistance \n5. Lucky Block Luck I \n6. Regen I \n7. Healing I')
             effect = input("Which effect do you want to toggle? (Choose Number) ")
             if effect == '1':
                 if ExplosivePickaxes <= 0:
@@ -1670,6 +1709,32 @@ def entire_game(player_name, texture):
                 else:
                     BlockBreakFortuneIEquip = False
                     print('Block Break (Fortune I) unequipped.')
+            if effect == '4':
+                if block_count[24] <= 0:
+                    print('No Sunstone found.')
+                else:
+                    heat_resistance = 15
+                    block_count[24] -= 1
+            if effect == '5':
+                if block_count[25] <= 0:
+                    print('No Starstone found.')
+                else:
+                    luck = 15
+                    block_count[25] -= 1
+            if effect == '6':
+                if block_count[26] <= 0:
+                    print('No Regen Stone found.')
+                else:
+                    regen = 15
+                    block_count[26] -= 1
+            if effect == '7':
+                if block_count[27] <= 0:
+                    print('No Healing Stone found.')
+                else:
+                    hp += 6
+                    if hp > 20:
+                        hp = 20
+                    block_count[27] -= 1
         elif (move.upper() == 'UAF' or move.upper() == 'USE A FIREBALL') and (gamemode == 'peaceful' or gamemode == 'survival' or gamemode == 'hard survival') and fireballs > 0:
             direction = input('Enter the direction: (WASD) ')
             fire_x = 0
@@ -1765,7 +1830,7 @@ def entire_game(player_name, texture):
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful' or gamemode == 'red light green light') and place + game_size < game_size ** 2:
                 if game[place + game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
-            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
+            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0 and heat_resistance <= 0:
                 hp -= 2
         else:
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and place - game_size >= 0:
@@ -1776,8 +1841,8 @@ def entire_game(player_name, texture):
             if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival' or gamemode == 'peaceful' or gamemode == 'red light green light') and place - game_size >= 0:
                 if game[place - game_size] == texture[22]:
                     player_global_gravity = -player_global_gravity
-            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0:
-                hp -= 2            
+            if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and burn_time > 0 and heat_resistance <= 0:   
+                    hp -= 2            
 
         for clone_fireball in range(game.count('🔴')):
             game[game.index('🔴')] = texture[-1]
@@ -1950,6 +2015,13 @@ def entire_game(player_name, texture):
         game[place] = '🙂'
 
         hp = int(hp)
+
+        if heat_resistance > 0:
+            heat_resistance -= 1
+        if luck > 0:
+            luck -= 1
+        if regen > 0:
+            regen -= 1
 
         """
         Possible gamemode?
