@@ -11,9 +11,9 @@ def entire_game(player_name, texture):
     if ['YES', 'Y'].__contains__(input('Do you want to change your texture pack? (Y/N) ').upper()):
         texture_name = input('Choose a texture pack: V5.3, V6.0 VS Code >? ')
         if texture_name.upper() == 'V5.3':
-            texture = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7', '#', 'W', 'S', 'L', 'O', 'I', 'M', 's', 'ⓢ', 'R', 'H', ' ']
+            texture = ['▪', '|', '0', '◈', '∥', '⊠', '∷', '⍠', '⌘', '◆', '▟', '▙', '▜', '▛', '⚠', '?', '7', '#', 'W', 'S', 'L', 'O', 'I', 'M', 's', 'ⓢ', 'R', 'H', '1', '2', '3', '4', ' ']
         if texture_name.upper() == 'V6.0 VS CODE':
-            texture = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '☀️ ', '⭐', '❤️ ', '🩷 ', '  ']
+            texture = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '☀️ ', '⭐', '❤️ ', '🩷 ', '❔', '❗', '❕', '⁉️ ', '  ']
     Time_Spent = 0
     game_size = 21
     vill_houses = {}  # List of villages
@@ -465,9 +465,9 @@ def entire_game(player_name, texture):
     BlockBreakFortuneI = 0
     fireballs = 100
     # VS Code Texture Pack (Wood, Stone, and have an extra space to align the columns):
-    block_types = [texture[0], texture[1], texture[2], texture[3], texture[4], texture[5], texture[6], texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[14], texture[15], texture[16], texture[17], texture[18], texture[19], texture[20], texture[21], texture[22], texture[23], texture[24], texture[25], texture[26], texture[27]]
-    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS', 'MOONSTONE', 'SUNSTONE', 'STARSTONE', 'REGEN STONES', 'HEALING STONES']
-    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0]
+    block_types = [texture[0], texture[1], texture[2], texture[3], texture[4], texture[5], texture[6], texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[14], texture[15], texture[16], texture[17], texture[18], texture[19], texture[20], texture[21], texture[22], texture[23], texture[24], texture[25], texture[26], texture[27], texture[28], texture[29], texture[30], texture[31]]
+    block_names = ['GRASS', 'WOOD', 'LEAVES', 'STONE', 'PLANKS', 'CHESTS', 'COAL', 'IRON', 'GOLD', 'DIAMONDS', 'UPRIGHT STAIRS', 'UPLEFT STAIRS', 'DOWNRIGHT STAIRS', 'DOWNLEFT STAIRS', 'TNT', 'LUCKY BLOCKS', 'LOTTERIES', 'MAGMA', 'WATER', 'SLIME BLOCKS', 'LAVA', 'OBSIDIAN', 'INVERTERS', 'MOONSTONE', 'SUNSTONE', 'STARSTONE', 'REGEN STONES', 'HEALING STONES', 'SECRET LUCKY BLOCK 1', 'SECRET LUCKY BLOCK 2', 'SECRET LUCKY BLOCK 3', 'SECRET LUCKY BLOCK 4']
+    block_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     entities = []
     entity_actions = []
     entity_up_speed = []
@@ -2034,7 +2034,7 @@ def entire_game(player_name, texture):
     print('Process finished with exit code 69420')  # Fake ending message
     return [username, texture]
 
-texture_pack = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '☀️ ', '⭐', '❤️ ', '🩷 ', '  ']
+texture_pack = ['🟩', '🪵 ', '🥬', '🪨 ', '🟨', '📦', '🔳', '⬜', '🪙 ', '💎', '▟|', '|▙', '▜|', '|▛', '💣', '❓', '🎰', '🔥', '🟦', '🟢', '🟧', '🌑', '🔃', '🌙', '☀️ ', '⭐', '❤️ ', '🩷 ', '❔', '❗', '❕', '⁉️ ', '  ']
 global_username, texture_pack = entire_game(0, texture_pack)
 while True:
     if ['YES', 'Y'].__contains__(input('\nDo you want to play again? (Y/N) ').upper()):
