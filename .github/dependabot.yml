@@ -9,6 +9,14 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    # Using 'allow' limits updates to only numpy
+    # If you want to update all dependencies, remove the 'allow' section
     allow:
       - dependency-name: "numpy"
+    # Added recommended settings
+    open-pull-requests-limit: 10
     versioning-strategy: auto
+    # Add labels to Dependabot PRs
+    labels:
+      - "dependencies"
+      - "automated"
