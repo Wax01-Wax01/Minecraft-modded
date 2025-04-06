@@ -489,7 +489,7 @@ def entire_game(player_name, texture):
     heat_resistance = 0
     luck = 0
     regen = 0
-    world_type = 'normal' # normal, amplified
+    world_type = 'normal' # normal, amplified, random
 
     # Parameters
 
@@ -581,11 +581,13 @@ def entire_game(player_name, texture):
         else:
             game_size = int(input('How big do u want ur world 2 b??? '))
         if ['Y', 'YES'].__contains__(input('Do you want to change the world type? (Y/N) ').upper()):
-            world_type_test = input('What do you want the world type to be? Normal or Amplified? ').lower()
+            world_type_test = input('What do you want the world type to be? Normal or Amplified or Random? ').lower()
             if world_type_test == 'normal':
                 world_type = 'normal'
             if world_type_test == 'amplified':
                 world_type = 'amplified'
+            if world_type_test == 'random':
+                world_type = 'random'
         y_terrain = int(np.floor(game_size/2))
         h20_terrain = int(np.floor(game_size/2))
         game = []  # World Terrain Generator
@@ -631,36 +633,69 @@ def entire_game(player_name, texture):
             place = game_size * (game_size-1) + i - y_terrain * game_size
             while j >= 0:
                 if y_terrain - j > random.randint(4, 5):
-                    game[place] = texture[3]
+                    if world_type != 'random':
+                        game[place] = texture[3]
+                    else:
+                        game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(14 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[6]
+                        if world_type != 'random':
+                            game[place] = texture[6]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(16 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[7]
+                        if world_type != 'random':    
+                            game[place] = texture[7]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(23 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[8]
+                        if world_type != 'random':    
+                            game[place] = texture[8]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[9]
+                        if world_type != 'random':    
+                            game[place] = texture[9]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(26 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[23]
+                        if world_type != 'random':    
+                            game[place] = texture[23]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(33 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[24]
+                        if world_type != 'random':    
+                            game[place] = texture[24]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(33 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[25]
+                        if world_type != 'random':    
+                            game[place] = texture[25]
+                        else:
+                            game[place] = random.choice(block_types)
                     
                     if random.randint(1, int(np.round(1.3 ** (float(abs(33 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[26]
+                        if world_type != 'random':    
+                            game[place] = texture[26]
+                        else:
+                            game[place] = random.choice(block_types)
 
                     if random.randint(1, int(np.round(1.3 ** (float(abs(33 - (y_terrain - j)) + 9))))) == 1:
-                        game[place] = texture[27]
+                        if world_type != 'random':    
+                            game[place] = texture[27]
+                        else:
+                            game[place] = random.choice(block_types)
                 else:
-                    game[place] = texture[0]
+                    if world_type != 'random':    
+                        game[place] = texture[0]
+                    else:
+                        game[place] = random.choice(block_types)
 
                 if random.randint(1, 3) == 1 and gamemode.upper() == 'HARD SURVIVAL':
                     game[place] = random.choice([texture[-1], texture[17]])
@@ -1985,9 +2020,9 @@ def entire_game(player_name, texture):
         if gamemode.upper() == 'EXPLOSION SURVIVAL':
             explode_tnt(random.randint(-20, 20), random.randint(0, 40), tnt_explosion_range, 1)
         if (gamemode == 'explosion survival' or gamemode == 'survival' or gamemode == 'hard survival') and hp <= 0:
-            print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')
-            break
-        if gamemode == 'red light green light':
+            print(f'You died, you lost all your health! You survived {Time_Spent} seconds!')  # just wait 20 days
+            break  # the game was made
+        if gamemode == 'red light green light':  # hello
             if Time_Spent % 20 == 7:
                 chat.append('Server: 3')
             if Time_Spent % 20 == 8:
