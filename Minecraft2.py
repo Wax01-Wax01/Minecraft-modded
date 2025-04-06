@@ -685,14 +685,15 @@ def entire_game(player_name, texture):
             mob_pos += game_size * (game_size - 1)
             while game[mob_pos] != texture[-1] and mob_pos >= game_size:
                 mob_pos -= game_size
-            entities.append(random.choice(['🐖', '🐄', '🐑', '🐔']))
-            entity_actions.append('chill')
-            entity_up_speed.append(0)
-            entity_location.append(mob_pos)
-            if entities[-1] == '🐔': 
-                entity_gravity.append(0.5)
-            else:
-                entity_gravity.append(1)
+            if mob_pos < game_size ** 2 - game_size:
+                entities.append(random.choice(['🐖', '🐄', '🐑', '🐔']))
+                entity_actions.append('chill')
+                entity_up_speed.append(0)
+                entity_location.append(mob_pos)
+                if entities[-1] == '🐔': 
+                    entity_gravity.append(0.5)
+                else:
+                    entity_gravity.append(1)
         for k in range(game_size):
             place = game_size * (game_size-1) + k - h20_terrain * game_size
             if game[place] != texture[-1]:
