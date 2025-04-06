@@ -6,7 +6,7 @@
  ![Minecraft-modded README pic](https://github.com/Wax01-Wax01/Minecraft-modded/assets/171621651/ef494bae-e059-4b93-a7c8-7c867c165c86)
 
 - # Features
-  - ## 2️⃣8️⃣ different types of visible blocks
+  - ## 2️⃣8️⃣ (➕4️⃣) different types of visible blocks
   - ## 1️⃣1️⃣ (➕2️⃣) gamemodes
     - ### What is a gamemode? A gamemode is a mode in the game.
   - ## Customizable Game Size
