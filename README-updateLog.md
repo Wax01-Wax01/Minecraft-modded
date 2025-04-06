@@ -2,6 +2,11 @@
 
 ## Welcome to Minecraft-modded! 
 
+### 3/24/2025 (republished 4/5/2025): New ores! ☀️⭐❤️🩷
+### ( Wax01-Wax01 )
+### ( V6️⃣.2️⃣ )
+**We need to go deeper... New ores have been added with special effects! What's going to happen in the upwards direction? Request by Wax01-Wax01**
+
 ### 3/21/2025: Red light green light! 🔴🟢
 ### ( liyongwang2018 )
 ### ( V6️⃣.1️⃣ )
