@@ -18,3 +18,7 @@ There might be new lucky blocks: ❔❗⁉️
 
 In the hardest items to obtain list, under V6.2, it says "TOP 8️⃣: Lucky Block ❓
 Get stone. (my brothers: ❔[buffed]❗[puts in inventory]❕[buffed version of❗]⁉️[buffed version of ❕and❔])"
+
+⬇️ Also appears on the gist
+
+**[GIST](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/Minecraft2.py](https://gist.github.com/Wax01-Wax01/cd85e8469f560c92569c721723017db0))**
