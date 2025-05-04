@@ -22,3 +22,27 @@ Get stone. (my brothers: ❔[buffed]❗[puts in inventory]❕[buffed version of�
 ⬇️ Also appears on the gist
 
 **[GIST](https://github.com/Wax01-Wax01/Minecraft-modded/blob/main/Minecraft2.py](https://gist.github.com/Wax01-Wax01/cd85e8469f560c92569c721723017db0))**
+
+### 4/21/2025 #0001
+
+Slime blocks will be bouncy soon!
+
+**PROOF:**
+
+Slime blocks already exist (ig)
+
+### 4/25/2025 #0001
+
+Mobs will have hp soon!
+
+**PROOF:**
+
+The player has hp, why shouldn't the mobs have hp?
+
+### 4/25/2025 #0002
+
+Hostile mobs will be added soon!
+
+**PROOF:**
+
+On the V6.4 update on the Update Log / Changelog, it says "Something strange is happening soon..." V6.4 added 2 more mobs, so maybe a later update could add more mobs, including hostile ones.
